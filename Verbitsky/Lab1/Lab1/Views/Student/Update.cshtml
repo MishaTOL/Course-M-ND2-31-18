@@ -1,0 +1,31 @@
+﻿<h2>Update Student</h2>
+@using Lab1.Models;
+@model List<Student>
+
+@using (Html.BeginForm("Update", "Student", FormMethod.Post))
+{
+    <h3>Введите id для удаления</h3>
+    <div>
+        @Html.Label("id")
+        <input type="text" name="id" />
+    </div>
+    <div>
+        @Html.Label("New FirsName")
+        <input type="text" name="FirstName"/>
+    </div>
+    <div>
+        @Html.Label("New LastName")
+        <input type="text" name="LastName" />
+    </div>
+    <div>
+        @Html.Label("New Age")
+        <input type="text" name="Age" />
+    </div>
+    <input type="submit" value="Update" />
+}
+<br />
+<hr />
+<br />
+@{
+    Html.RenderPartial("ListOfStudentsPartial");
+}

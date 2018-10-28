@@ -1,0 +1,26 @@
+﻿<h2>Add new Student</h2>
+@model Lab1.Models.Student
+
+@using (Html.BeginForm("Create", "Student", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(a => a.FirstName)
+        @Html.EditorFor(a => a.FirstName)
+    </div>
+    <div>
+        @Html.LabelFor(a => a.LastName)
+        @Html.EditorFor(a => a.LastName)
+    </div>
+    <div>
+        @Html.LabelFor(a => a.Age)
+        @Html.EditorFor(a => a.Age)
+    </div>
+    <input type="submit" value="send" />
+}
+<hr />
+@if (Model != null)
+{
+    <div>
+        @Html.Label(Model.FirstName + " добавлен", new { @class = "text-success" })
+    </div>
+}

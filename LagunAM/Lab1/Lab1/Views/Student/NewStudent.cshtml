@@ -1,0 +1,44 @@
+﻿@using Lab1.Models
+@model StudentSummary
+
+<link href="http://cdn.jsdelivr.net/bootstrap.datepicker/0.1/css/datepicker.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+<script src="http://cdn.jsdelivr.net/bootstrap.datepicker/0.1/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker").datepicker(
+            {
+                viewMode: 'month',
+                format: 'dd-mm-yyyy'
+            });
+    });
+</script>
+
+
+
+@using (Html.BeginForm("NewStudent", "Student", FormMethod.Get))
+{
+    @Html.ActionLink("На главную", "Index", "Student", null, null)
+    <p> Введите дату поступления:</p>
+    <p>
+        <div class="input-append date" id="datepicker" data-date="02-2012">
+            <input type="text" readonly="readonly" name="ReceiptDate" required="required">
+            <span class="add-on"><i class="icon-th"></i></span>
+        </div>
+    </p>
+
+    foreach (System.Collections.Generic.KeyValuePair<string, string> Now in Lab1.Views.Student.ActionsConst.StudentFields)
+    {
+        <p>@Now.Key</p>
+        @Html.TextBox(@Now.Value, "", new { required = "required" });
+    }
+
+    <p>
+        <input type="submit" value="Добавить" formmethod="post">
+    </p>
+
+}
+
+

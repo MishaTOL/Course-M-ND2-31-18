@@ -1,0 +1,30 @@
+﻿@model Lab1.Models.Student
+
+@{
+    ViewBag.Title = "AddStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Добавление нового студента</h3>
+<h4><b>Введите данные о новом студенте:</b></h4>
+
+@using (Html.BeginForm("AddStudent", "Student"))
+{
+        <div hidden>@Html.TextBoxFor(x => x.id)</div>
+  
+        <label>@Html.DisplayName("Фамилия: ")</label>
+        <div>@Html.TextBoxFor(x => x.surname)</div>
+
+        <label>@Html.DisplayName("Имя: ")</label>
+        <div>@Html.TextBoxFor(x => x.name)</div>
+
+        <label>@Html.DisplayName("Год поступления: ")</label>
+        <div>@Html.TextBoxFor(x => x.yearOfEntering)</div>
+
+        <label>@Html.DisplayName("Специальность: ")</label>
+        <div>@Html.TextBoxFor(x => x.specialty)</div>
+<br />
+<div><input type="submit" value="Добавить" /></div>
+
+}
+

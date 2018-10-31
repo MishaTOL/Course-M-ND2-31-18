@@ -32,7 +32,7 @@ namespace Student.Service
         {
             var selectedStudent = repository.Load().Where(x => x.Id == id);
             var student = selectedStudent.ToList()[0];
-            return new StudentViewModel //я очень тороплюсь сдать эту лабу, прошу понять и простить
+            return new StudentViewModel
             {
                 Id = student.Id,
                 Name = student.Name,

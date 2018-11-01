@@ -1,0 +1,17 @@
+﻿@model Lab1.Models.Student
+<br />
+@Html.ValidationSummary()
+@using (Html.BeginForm("Create", "Student", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(x => x.FirstName)
+        @Html.EditorFor(x => x.FirstName)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.LastName)
+        @Html.EditorFor(x => x.LastName)
+    </div>
+    <div>
+        <input type="submit" value="Create" />
+    </div>
+}

@@ -1,0 +1,84 @@
+﻿@using Lab2.Models;
+@model Lab2.Models.Post
+
+<h2>Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Header)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Header)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author.FirstName) автора
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TagsPosts)
+        </dt>
+
+        <dd>
+            @foreach(var i in Model.TagsPosts)
+            {
+                <div style="float: left; margin-right: 10px;">@i.Tags.Name </div>
+            }
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <p>
+        @Html.ActionLink("Create New Comment", "Create", "Comments", new { Post_Id = Model.Id }, new object())
+    </p>
+    <br />
+    <table class="table">
+        @foreach (var item in Model.Comments ?? new List<Comment>())
+        {
+            <tr>
+                <dib>
+                    <h4>@Html.DisplayFor(modelItem => item.Content)</h4>
+                </dib>
+                <span>
+                    @Html.DisplayFor(a => a.Author.FirstName)
+                    @Html.DisplayFor(modelItem => item.Created)
+                </span>
+                <br />
+                <span>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </span>
+                <hr />
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Posts", "Index")
+</p>

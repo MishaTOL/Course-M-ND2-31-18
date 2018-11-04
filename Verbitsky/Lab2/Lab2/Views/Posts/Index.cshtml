@@ -1,0 +1,31 @@
+﻿@using Lab2.Models;
+@model ValueTuple<Student, IEnumerable<Post>>
+
+<h2>Посты</h2>
+
+@if(Model.Item1 != null)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+<table class="table">
+@foreach (var item in Model.Item2 ?? new List<Post>()) {
+    <tr>
+        <td>
+            <div>
+                <h3>@Html.DisplayFor(modelItem => item.Header)</h3>
+                @Html.DisplayFor(modelItem => item.Content)
+            </div>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+</table>

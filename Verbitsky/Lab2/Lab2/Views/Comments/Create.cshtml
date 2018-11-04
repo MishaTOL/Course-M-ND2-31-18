@@ -23,7 +23,6 @@
         </div>
     </div>
 }
-
 <div>
-    @Html.ActionLink("Back to List", "Index", "Posts")
+    @Html.ActionLink("Back to Details", "Details", "Posts", new { id = Model.PostId }, new object())
 </div>

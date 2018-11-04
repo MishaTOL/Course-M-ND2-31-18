@@ -22,11 +22,11 @@ namespace Lab2.Controllers
             comment.PostId = (int)Session["Post_Id"];
             db.Comments.Add(comment);
             db.SaveChanges();
-            return RedirectToAction("Details", "Posts", new { id = ((Student)Session["User"]).Id });
+            return RedirectToAction("Details", "Posts", new { id = (int)Session["Post_Id"] });
         }
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(db.Comments.Where(a => a.Id == id).SingleOrDefault());
         }
         [HttpPost]
         public ActionResult Edit(Comment comment)
@@ -34,15 +34,15 @@ namespace Lab2.Controllers
             db.Comments.Add(comment);
             db.Entry(comment).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Details", "Posts", new { id = comment.PostId });
         }
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int id_Post)
         {
             var comment = new Comment { Id = id };
             db.Comments.Attach(comment);
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Details", "Posts", new { id = id_Post });
         }
     }
 }

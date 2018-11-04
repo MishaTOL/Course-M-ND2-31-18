@@ -11,17 +11,16 @@ namespace Lab2.Models
         public int Id { get; set; }
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Заголовок")]
+        [Display(Name = "Header")]
         public string Header { get; set; }
         [Required]
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Текст поста")]
+        [Display(Name = "Content ")]
         public string Content { get; set; }
 
         public virtual int AuthorId { get; set; }
-        [Display(Name = "Автор")]
+        [Display(Name = "Author")]
         public virtual Student Author { get; set; }
-
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime Created { get; set; }

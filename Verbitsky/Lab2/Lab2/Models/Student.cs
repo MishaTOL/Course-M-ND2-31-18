@@ -10,10 +10,10 @@ namespace Lab2.Models
     {
         public int Id { get; set; }
         [Required]
-        [Display(Name = "Имя")]
+        [Display(Name = "Name")]
         public string FirstName { get; set; }
         [Required]
-        [Display(Name = "Фамилия")]
+        [Display(Name = "Surname")]
         public string LastName { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

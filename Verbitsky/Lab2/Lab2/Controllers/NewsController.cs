@@ -12,7 +12,6 @@ namespace Lab2.Controllers
     public class NewsController : Controller
     {
         private NewsStudentDbContext db = new NewsStudentDbContext();
-
         public ActionResult Index()
         {
             return View();
@@ -20,18 +19,18 @@ namespace Lab2.Controllers
         [HttpPost]
         public ActionResult Index(Student _student)
         {
-            var buf = db.Students
+            var user = db.Students
                 .Where(a => a.FirstName == _student.FirstName && a.LastName == _student.LastName)
                 .SingleOrDefault();
-            if(buf == null)
+            if(user == null)
             {
                 db.Students.Add(_student);
                 db.SaveChanges();
-                buf = db.Students
+                user = db.Students
                     .Where(a => a.FirstName == _student.FirstName && a.LastName == _student.LastName)
                     .SingleOrDefault();
             }
-            Session["User"] = buf;
+            Session["User"] = user;
             return RedirectToAction("Index", "Posts");
         }
     }

@@ -12,8 +12,7 @@ namespace Lab2.Controllers
         private NewsStudentDbContext db = new NewsStudentDbContext();
         public ActionResult Index()
         {
-            IEnumerable<Post> posts = db.Posts.ToList();
-            return View((User: (Student)Session["User"], Posts: posts));
+            return View(db.Posts.ToList().AsEnumerable());
         }
         public ActionResult Create()
         {
@@ -23,6 +22,8 @@ namespace Lab2.Controllers
         public ActionResult Create(Post post, string tags)
         {
             post.AuthorId = ((Student)Session["User"]).Id;
+            db.Posts.Add(post);
+
             foreach (var tag in tags.Split(' '))
             {
                 var buf = db.Tags.Where(a => a.Name == tag).SingleOrDefault();
@@ -40,7 +41,6 @@ namespace Lab2.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        [HttpGet]
         public ActionResult Edit(int id)
         {
             return View(db.Posts.Where(a => a.Id == id).SingleOrDefault());
@@ -55,7 +55,7 @@ namespace Lab2.Controllers
         }
         public ActionResult Details(int id)
         {
-            return View(db.Posts.Include("Author").Include("Comments").Where(a => a.Id == id).SingleOrDefault());
+            return View(db.Posts.Include("Author").Include("Comments").Include("TagsPosts").Where(a => a.Id == id).SingleOrDefault());
         }
         public ActionResult Delete(int id)
         {

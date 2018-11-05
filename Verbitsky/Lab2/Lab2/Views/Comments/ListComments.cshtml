@@ -1,0 +1,20 @@
+﻿@using Lab2.Models;
+@model ICollection<Lab2.Models.ViewModels.Comments.PartialListCommentViewModel>
+
+@foreach (var item in Model)
+{
+    <h4> @Html.DisplayFor(modelItem => item.Content) </h4>
+    <span>
+        @Html.DisplayFor(modelItem => item.Author)
+        @Html.DisplayFor(modelItem => item.Created)
+    </span>
+    <span>
+        @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == item.AuthorId)
+        {
+            @Html.ActionLink("Edit", "Edit", "Comments", new { id = item.Id, id_Post = item.Id }, new object())
+            <span> | </span>
+            @Html.ActionLink("Delete", "Delete", "Comments", new { id = item.Id, PostId = item.PostId }, new object())
+        }
+    </span>
+    <hr/>
+}

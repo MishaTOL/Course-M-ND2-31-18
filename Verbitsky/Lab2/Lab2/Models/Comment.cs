@@ -10,8 +10,6 @@ namespace Lab2.Models
     {
         public int Id { get; set; }
         [Required]
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "Comment")]
         public string Content { get; set; }
         public virtual int AuthorId { get; set; }
         public virtual Student Author { get; set; }

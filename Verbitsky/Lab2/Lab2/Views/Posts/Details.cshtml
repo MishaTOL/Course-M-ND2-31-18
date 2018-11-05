@@ -1,5 +1,7 @@
-﻿@using Lab2.Models;
-@model Lab2.Models.Post
+﻿@using Lab2.Models.ViewModels.Posts
+@using Lab2.Models.ViewModels.Comments
+@using Lab2.Models
+@model DetailsPostViewModel
 
 <h2>Details</h2>
 <div>
@@ -23,11 +25,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Author.FirstName) автора
+            @Html.DisplayNameFor(model => model.Author)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Author.FirstName)
+            @Html.DisplayFor(model => model.Author)
         </dd>
 
         <dt>
@@ -43,7 +45,7 @@
         </dt>
 
         <dd>
-            @foreach(var i in Model.TagsPosts)
+            @foreach (var i in Model.TagsPosts)
             {
                 <div style="float: left; margin-right: 10px;">@i.Tags.Name </div>
             }
@@ -51,38 +53,11 @@
 
     </dl>
 </div>
-<div>
-    <p>
-        @if ((Session["User"] as Student) != null)
-        {
-            @Html.ActionLink("Create New Comment", "Create", "Comments", new { Post_Id = Model.Id }, new object())
-        }
-    </p>
-    <br />
-    <table class="table">
-        @foreach (var item in Model.Comments ?? new List<Comment>())
-        {
-            <tr>
-                <dib>
-                    <h4>@Html.DisplayFor(modelItem => item.Content)</h4>
-                </dib>
-                <span>
-                    @Html.DisplayFor(a => a.Author.FirstName)
-                    @Html.DisplayFor(modelItem => item.Created)
-                </span>
-                <br />
-                <span>
-                    @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == item.AuthorId)
-                    {
-                        @Html.ActionLink("Edit", "Edit", "Comments", new { id = item.Id, id_Post = Model.Id }, new object())
-                        @Html.ActionLink("Delete", "Delete", "Comments", new { id = item.Id, id_Post = Model.Id }, new object())
-                    }
-                    </span>
-                <hr />
-            </tr>
-        }
-    </table>
-</div>
+@if (Session["User"] != null)
+{
+    <p> @Html.ActionLink("Add comment", "Create", "Comments", new { PostId = Model.Id }, new object()) </p>
+}
+@Html.Partial("~/Views/Comments/ListComments.cshtml", AutoMapper.Mapper.Map<ICollection<Comment>, ICollection<PartialListCommentViewModel>>(Model.Comments))
 <p>
     @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == Model.AuthorId)
     {

@@ -1,37 +1,39 @@
-﻿@using Lab2.Models;
-@model IEnumerable<Post>
+﻿@using Lab2.Models
+@using Lab2.Models.ViewModels.Posts
+@model IEnumerable<IndexPostViewModel>
 
 <h2>Posts</h2>
 
-@if((Session["User"] as Student) != null)
+@if ((Session["User"] as Student) != null)
 {
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
 }
 <table class="table">
-@foreach (var item in Model ?? new List<Post>()) {
-    <tr>
-        <td>
-            <div>
-                <h3>@Html.DisplayFor(modelItem => item.Header)</h3>
-                @Html.DisplayFor(modelItem => item.Content)
-            </div>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @if((Session["User"] as Student) != null && (Session["User"] as Student).Id == item.Author.Id)
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span>|</span>
-            }
-            @Html.ActionLink("Details", "Details", new { id= item.Id }) 
-            @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == item.Author.Id)
-            { 
-                <span>| </span>@Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            }
-        </td>
-    </tr>
-}
+    @foreach (var item in Model ?? new List<IndexPostViewModel>())
+    {
+        <tr>
+            <td>
+                <div>
+                    <h3>@item.Header</h3>
+                    @item.Content
+                </div>
+            </td>
+            <td>
+                @item.Created.ToString() <strong>by @item.Author</strong>
+            </td>
+            <td>
+                @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == item.AuthorId)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span>|</span>
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == item.AuthorId)
+                {
+                    <span>| </span>@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
 </table>

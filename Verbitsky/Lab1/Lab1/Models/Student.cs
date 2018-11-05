@@ -7,9 +7,9 @@ namespace Lab1.Models
 {
     public class Student
     {
-        public uint? id { get; set; }
+        public int id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public uint Age { get; set; }
+        public int Age { get; set; }
     }
 }

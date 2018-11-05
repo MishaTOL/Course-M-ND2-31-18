@@ -19,38 +19,46 @@ namespace Lab1.Models
                 if (!File.Exists(Path))
                     File.Create(Path).Dispose();
             }catch {
-                throw new Exception("Укажите путь к json файлу (Lab1/Controllers/)");
+                throw new Exception("Specify the path to the json file (Lab1/Controllers/)");
             }
         }
         public void Update(Student student)
         {
-            Delete(student.id.Value);
+            Delete(student.id);
             Create(student);
         }
         public List<Student> Read()
         {
             List<Student> students = new List<Student>();
-            using(var stream = new StreamReader(Path))
-                while(!stream.EndOfStream)
-                    students.Add(JsonConvert.DeserializeObject<Student>(stream.ReadLine()));
+            using (var stream = new StreamReader(Path))
+                while (!stream.EndOfStream)
+                    students = JsonConvert.DeserializeObject<Student[]>(stream.ReadToEnd()).ToList();
             return students;
         }
         public void Create(Student student)
         {
-            if(student.id == null)
+            var list = Read();
+            if (student.id == 0)
             {
-                var maxId = Read().Max(a => a.id) + 1;
-                student.id = (maxId == null) ? 0 : maxId.Value;
+                if (list.Count == 0)
+                    student.id = 0;
+                else
+                {
+                    var maxId = list.Max(a => a.id) + 1;
+                    student.id = (maxId == 0) ? 1 : maxId;
+                }
             }
-            using(var stream = new StreamWriter(Path, true))
-                stream.WriteLine(JsonConvert.SerializeObject(student));
+            using (var stream = new StreamWriter(Path, false))
+            {
+                list.Add(student);
+                stream.WriteLine(JsonConvert.SerializeObject(list.ToArray()));
+            }
         }
-        public void Delete(uint id)
+        public void Delete(int id)
         {
             var list = Read().Where(a => a.id != id);
-            File.WriteAllText(Path, (list.Count() == 0) 
-                ? "" 
-                : list.Select(a => JsonConvert.SerializeObject(a)).Aggregate((a,b) => a + Environment.NewLine + b) + Environment.NewLine);
+            using (var stream = new StreamWriter(Path, false))
+                stream.WriteLine(JsonConvert.SerializeObject(list.ToArray()));
         }
     }
 }

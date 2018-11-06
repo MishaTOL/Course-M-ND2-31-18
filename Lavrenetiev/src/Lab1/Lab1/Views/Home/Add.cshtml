@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Add";
+}
+
+@model Lab1.Models.Student
+
+<h2>Add student</h2>
+
+@using (Html.BeginForm("Add", "Home", FormMethod.Post))
+{
+    <fieldset>
+        <p>
+            @Html.LabelFor(m => m.Name)
+            <br />
+            @Html.EditorFor(m => m.Name)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.LastName)
+            <br />
+            @Html.EditorFor(m => m.LastName)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Course)
+            <br />
+            @Html.EditorFor(m => m.Course)
+        </p>
+        <p>
+            <input type="submit" value="Add" />
+        </p>
+    </fieldset>
+}

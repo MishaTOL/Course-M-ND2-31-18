@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Showed";
+}
+
+@model Lab1.Models.Student
+
+<h2>Student id @Html.DisplayFor(m => m.Id)</h2>
+
+@using (Html.BeginForm("ShowPost", "Home", FormMethod.Post))
+{
+    <fieldset>
+        <p>
+            @Html.DisplayNameFor(m => m.Name) <b>@Html.DisplayFor(m => m.Name)</b>
+            <br />
+        </p>
+        <p>
+            @Html.DisplayNameFor(m => m.LastName) <b>@Html.DisplayFor(m => m.LastName)</b>
+            <br />
+        </p>
+        <p>
+            @Html.DisplayNameFor(m => m.Course) <b>@Html.DisplayFor(m => m.Course)</b>
+            <br />
+        </p>
+    </fieldset>
+}

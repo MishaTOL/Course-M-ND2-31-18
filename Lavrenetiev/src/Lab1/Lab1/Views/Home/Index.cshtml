@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "List of students";
+}
+
+<h2>List of students</h2>
+<br />
+@foreach (var student in Model)
+{
+    <section>
+        <p>
+            <h4><b>@student.Name @student.LastName</b> (id @student.Id)</h4>
+            <h5>course @student.Course</h5>
+            <br />
+        </p>
+    </section>
+}

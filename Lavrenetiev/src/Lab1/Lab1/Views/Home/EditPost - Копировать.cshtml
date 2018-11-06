@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Student №@Model.Id:</h2>
+<h4>@Model.Name</h4>
+<h4>@Model.LastName</h4>
+<h4>@Model.Course</h4>
+
+<form method="post" action="edit">
+    <fieldset>
+        Student's id:
+        <br />
+        <input type="text" name="Id" value="@Model.Id" readonly/>
+        <br />
+        <br />
+        Name:
+        <br />
+        <input type="text" name="Name" maxlength="200" @*value="@Model.Name"*@ required/>
+        <br />
+        <br />
+        Last Name:
+        <br />
+        <input type="text" name="LastName" maxlength="200"  @*value="@Model.LastName"*@ required/>
+        <br />
+        <br />
+        Course:
+        <br />
+        <input type="text" name="Course" maxlength="10"  @*value="@Model.Course"*@ required/>
+        <br />
+        <br />
+        <input type="submit" value="Edit" />
+    </fieldset>
+    <br />
+</form>

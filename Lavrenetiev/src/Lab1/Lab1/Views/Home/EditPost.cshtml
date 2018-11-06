@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Edit";
+}
+@model Lab1.Models.Student
+
+<h2>Student id @Html.DisplayFor(m => m.Id)</h2>
+
+@using (Html.BeginForm("EditPost", "Home", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.Name, "Name")
+            <br />
+            @Html.EditorFor(m => m.Name)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.LastName, "Last Name")
+            <br />
+            @Html.EditorFor(m => m.LastName)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Course, "Course")
+            <br />
+            @Html.EditorFor(m => m.Course)
+        </p>
+        <p>
+            <input type="submit" value="Edit" />
+        </p>
+    </fieldset>
+}

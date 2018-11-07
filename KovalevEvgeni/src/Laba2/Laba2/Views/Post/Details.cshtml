@@ -1,0 +1,43 @@
+﻿@model Laba2.Models.PostModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h3>Details news</h3>
+    <hr />
+    <div>
+        <div class="media-body">
+            <div class="media-heading">
+                <div class="author">@Model.Author</div>
+                <div class="metadata">
+                    <span class="date">@Model.DateCreate</span>
+                </div>
+            </div>
+            <div class="media-text text-justify">@Model.Content</div>
+            <div class="text-justify">@Model.Tags</div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("To the list of news", "Index")
+</p>
+<div class="comments">
+    <h4 class="title-comments">Comments (@Model.CommentModels.Count())  @Html.ActionLink("Create comment", "Create", "Comment", new { postId = Model.PostId }, new { @class = "btn btn-default" })</h4>
+   
+    @foreach (Laba2.Models.CommentModel item in Model.CommentModels)
+    {
+        <div>
+            <div class="media-body">
+                <div class="media-heading">
+                    <div class="author">@item.Author</div>
+                    <div class="metadata">
+                        <span class="date">@item.DateCreate</span>
+                    </div>
+                </div>
+                <div class="media-text text-justify">@item.Details</div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Lab1.Models.StudentInfo>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        .main{
+            width:100%;
+        }
+        .tableOfStudents{
+            width:90%;
+            text-align:center;
+        }
+        .table{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        List of Students
+    </div>
+    <div>@Html.ActionLink("Create a new student", "Create")</div>
+    <hr>
+    <div class="main">
+        <div class="table">
+            <p style="color:red; width:90%; text-align:center"><b>@ViewBag.Error</b></p>
+            <table class="tableOfStudents">
+
+                @if (Model != null)
+                {
+                    <tr>
+                        <td width="16.6%"><b>Id</b></td>
+                        <td width="16.6%"><b>First name</b></td>
+                        <td width="16.6%"><b>Second name</b></td>
+                        <td width="16.6%"><b>Age</b></td>
+                        <td width="16.6%"><b>Update</b></td>
+                        <td width="16.6%"><b>Delete</b></td>
+                    </tr>
+                    foreach (Lab1.Models.StudentInfo student in Model)
+                    {
+                        <tr>
+                            <td width="16.6%">@student.Id</td>
+                            <td width="16.6%">@student.FirstName</td>
+                            <td width="16.6%">@student.SecondName</td>
+                            <td width="16.6%">@student.Age</td>
+                            <td width="16.6%"><a href="/StudentRepository/Update?id=@student.Id">Update</a></td>
+                            <td width="16.6%"><a href="/StudentRepository/Delete?id=@student.Id">Delete</a></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" width="100%"><h3>A student data base is empty</h3></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>

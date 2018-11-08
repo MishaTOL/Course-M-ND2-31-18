@@ -41,13 +41,13 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TagsPosts)
+            @Html.DisplayNameFor(model => model.Tags)
         </dt>
 
         <dd>
-            @foreach (var i in Model.TagsPosts)
+            @foreach (var i in Model.Tags)
             {
-                <div style="float: left; margin-right: 10px;">@i.Tags.Name </div>
+                <div style="float: left; margin-right: 10px;">@i.Name </div>
             }
         </dd>
 
@@ -55,7 +55,7 @@
 </div>
 @if (Session["User"] != null)
 {
-    <p> @Html.ActionLink("Add comment", "Create", "Comments", new { PostId = Model.Id }, new object()) </p>
+    <p> @Html.ActionLink("Add comment", "Create", "Comments", new { postId = Model.Id }, new object()) </p>
 }
 @Html.Partial("~/Views/Comments/ListComments.cshtml", AutoMapper.Mapper.Map<ICollection<Comment>, ICollection<PartialListCommentViewModel>>(Model.Comments))
 <p>

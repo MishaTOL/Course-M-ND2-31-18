@@ -12,10 +12,14 @@ namespace Lab2.Controllers
 {
     public class CommentsController : Controller
     {
-        private NewsStudentDbContext db = new NewsStudentDbContext();
-        public ActionResult Create(int PostId)
+        private NewsStudentDbContext db;
+        public CommentsController()
         {
-            return View(new CreateCommentViewModel() { PostId = PostId });
+            db = new NewsStudentDbContext();
+        }
+        public ActionResult Create(int postId)
+        {
+            return View(new CreateCommentViewModel() { PostId = postId });
         }
         [HttpPost]
         public ActionResult Create(CreateCommentViewModel _comment)

@@ -13,6 +13,10 @@ namespace Lab2.Controllers
     public class NewsController : Controller
     {
         private NewsStudentDbContext db = new NewsStudentDbContext();
+        public NewsController()
+        {
+            db = new NewsStudentDbContext();
+        }
         public ActionResult Index()
         {
             return View();
@@ -25,7 +29,6 @@ namespace Lab2.Controllers
                 .SingleOrDefault();
             if(user == null)
             {
-                Mapper.Initialize(a => a.CreateMap<IndexStudentViewModel, Student>());
                 var student = Mapper.Map<IndexStudentViewModel, Student>(_student);
                 db.Students.Add(student);
                 db.SaveChanges();

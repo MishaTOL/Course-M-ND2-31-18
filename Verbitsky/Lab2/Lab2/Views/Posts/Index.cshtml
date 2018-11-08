@@ -16,12 +16,12 @@
         <tr>
             <td>
                 <div>
-                    <h3>@item.Header</h3>
+                    <h3><strong>@item.Header</strong></h3>
                     @item.Content
                 </div>
             </td>
             <td>
-                @item.Created.ToString() <strong>by @item.Author</strong>
+                @item.Created.ToString() by <strong>@item.Author</strong>
             </td>
             <td>
                 @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == item.AuthorId)

@@ -15,36 +15,29 @@ namespace Lab2.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tags> Tags { get; set; }
-        public DbSet<TagsPosts> TagsPosts { get; set; }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Student>().
-                HasMany(a => a.Posts).
-                WithRequired(a => a.Author)
+            modelBuilder.Entity<Student>()
+                .HasMany(a => a.Posts)
+                .WithRequired(a => a.Author)
                 .HasForeignKey(a => a.AuthorId);
 
             modelBuilder.Entity<Student>().
-                HasMany(a => a.Comments).
-                WithRequired(a => a.Author)
+                HasMany(a => a.Comments)
+                .WithRequired(a => a.Author)
                 .HasForeignKey(a => a.AuthorId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<TagsPosts>()
-                .HasKey(a => new { a.IdTag, a.IdPost });
-
             modelBuilder.Entity<Tags>()
-                .HasMany(a => a.TagsPosts)
-                .WithRequired()
-                .HasForeignKey(a => a.IdTag)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Post>()
-                .HasMany(a => a.TagsPosts)
-                .WithRequired()
-                .HasForeignKey(a => a.IdPost)
-                .WillCascadeOnDelete(false);
+                .HasMany(a => a.Posts)
+                .WithMany(a => a.Tags)
+                .Map(a =>
+                {
+                    a.MapLeftKey("Tags_Id");
+                    a.MapRightKey("Posts_Id");
+                    a.ToTable("TagsPosts");
+                });
         }
     }
 }

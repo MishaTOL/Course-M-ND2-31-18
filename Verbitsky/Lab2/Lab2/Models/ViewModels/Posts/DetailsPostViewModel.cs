@@ -24,6 +24,6 @@ namespace Lab2.Models.ViewModels.Posts
         [DataType(DataType.DateTime)]
         public DateTime Created { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public ICollection<TagsPosts> TagsPosts { get; set; }
+        public ICollection<Tags> Tags { get; set; }
     }
 }

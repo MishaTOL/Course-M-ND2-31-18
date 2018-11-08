@@ -15,12 +15,14 @@ namespace Lab2.Infrastructure
         public AutomapperWebProfile()
         {
             CreateMap<Post, IndexPostViewModel>()
-                .ForMember("Author", b => b.MapFrom(c => c.Author.FirstName));
+                .ForMember("Author", a => a.MapFrom(b => b.Author.FirstName));
+
+            CreateMap<IndexStudentViewModel, Student>();
 
             CreateMap<CreatePostViewModel, Post>();
             
             CreateMap<Post, DetailsPostViewModel>()
-                .ForMember("Author", b => b.MapFrom(c => c.Author.FirstName));
+                .ForMember("Author", a => a.MapFrom(b => b.Author.FirstName));
 
             CreateMap<CreateCommentViewModel, Comment>();
 
@@ -31,7 +33,7 @@ namespace Lab2.Infrastructure
             CreateMap<EditCommentViewModel, Comment>();
 
             CreateMap<Comment, PartialListCommentViewModel>()
-                .ForMember("Author", b => b.MapFrom(c => c.Author.FirstName));
+                .ForMember("Author", a => a.MapFrom(b => b.Author.FirstName));
         }
 
         public static void Run()

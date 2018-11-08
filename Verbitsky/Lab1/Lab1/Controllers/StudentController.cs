@@ -9,7 +9,11 @@ namespace Lab1.Controllers
 {
     public class StudentController : Controller
     {
-        private DBContext db = new DBContext(@"D:\Projects\C#\Course-M-ND2-31-18\Verbitsky\Lab1\Lab1\App_Data\DB.json");
+        private DBContext db;
+        public StudentController()
+        {
+            db = new DBContext();
+        }
         public ActionResult Index()
         {
             return View(db.Read());

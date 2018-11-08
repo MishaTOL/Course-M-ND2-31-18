@@ -11,7 +11,7 @@ namespace Lab1.Models
     public class DBContext
     {
         private string Path;
-        public DBContext(string Path)
+        public DBContext(string Path = @"D:\Projects\C#\Course-M-ND2-31-18\Verbitsky\Lab1\Lab1\App_Data\DB.json")
         {
             this.Path = Path;
             try
@@ -24,7 +24,7 @@ namespace Lab1.Models
         }
         public void Update(Student student)
         {
-            Delete(student.id);
+            Delete(student.Id);
             Create(student);
         }
         public List<Student> Read()
@@ -38,14 +38,14 @@ namespace Lab1.Models
         public void Create(Student student)
         {
             var list = Read();
-            if (student.id == 0)
+            if (student.Id == 0)
             {
                 if (list.Count == 0)
-                    student.id = 0;
+                    student.Id = 0;
                 else
                 {
-                    var maxId = list.Max(a => a.id) + 1;
-                    student.id = (maxId == 0) ? 1 : maxId;
+                    var maxId = list.Max(a => a.Id) + 1;
+                    student.Id = (maxId == 0) ? 1 : maxId;
                 }
             }
             using (var stream = new StreamWriter(Path, false))
@@ -56,7 +56,7 @@ namespace Lab1.Models
         }
         public void Delete(int id)
         {
-            var list = Read().Where(a => a.id != id);
+            var list = Read().Where(a => a.Id != id);
             using (var stream = new StreamWriter(Path, false))
                 stream.WriteLine(JsonConvert.SerializeObject(list.ToArray()));
         }

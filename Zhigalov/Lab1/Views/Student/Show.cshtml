@@ -1,0 +1,35 @@
+﻿@model List<Lab1.Models.Student>
+<br />
+<table>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.Id</td>
+            <td>@student.FirstName</td>
+            <td>@student.LastName</td>
+        </tr>
+
+    }
+</table>
+@using (Html.BeginForm(null, "Student", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Choose Id")
+        <input type="number" min="1" max="@Model.Count" name="id" value="1" />
+    </div>
+    <div>
+        <button role="button" type="submit" name="Delete">Delete</button>
+        <button role="button" type="submit" name="Update">Update</button>
+    </div>
+}
+<div>
+    @Html.ActionLink("Create New", "Create", "Student")
+</div>
+
+
+

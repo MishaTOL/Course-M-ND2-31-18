@@ -1,0 +1,84 @@
+﻿@model ServiceModels.PostInfo
+
+@{
+    ViewBag.Title = "GetPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetPost</h2>
+
+<div>
+    <h4>PostInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+
+        <dd>
+            @foreach (var tag in Model.Tags)
+            {
+
+                @Html.DisplayFor(model => tag.Tag.Name)
+
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author.FirstName) @Html.DisplayFor(model => model.Author.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <h2>Comments</h2>
+
+        @foreach (var comment in Model.Comments)
+        {
+            <dd>
+                @Html.DisplayFor(model => comment.Author.FirstName) @Html.DisplayFor(model => comment.Author.LastName)
+            </dd>
+
+            <dd>
+                @Html.DisplayFor(model => comment.Content)
+            </dd>
+
+            <dd>
+                <input type="button" value="Edit" onclick="location.href='@Url.Action("EditComment", "Comment", new { user = TempData["user"], post = TempData["post"], comment = comment.Id  })'" class="btn btn-default" />
+                <input type="button" value="Delete" onclick="location.href='@Url.Action("DeleteComment", "Comment", new { user = TempData["user"], post = TempData["post"], comment = comment.Id })'" class="btn btn-default" />
+            </dd>
+        }
+
+    </dl>
+</div>
+<div>
+    <input type="button" value="Back" onclick="location.href='@Url.Action("NewsFeed", "StudPortal", new { user = TempData["user"] })'" class="btn btn-default" />
+    <input type="button" value="Add Comment" onclick="location.href='@Url.Action("CreateComment", "Comment", new { user = TempData["user"], post = TempData["post"]})'" class="btn btn-default" />
+</div>
+
+

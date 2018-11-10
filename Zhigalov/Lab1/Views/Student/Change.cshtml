@@ -1,0 +1,17 @@
+﻿@model Lab1.Models.Student
+<br />
+@using (Html.BeginForm("Change", "Student", FormMethod.Post))
+{
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div>
+        @Html.LabelFor(x => x.FirstName)
+        @Html.EditorFor(x => x.FirstName)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.LastName)
+        @Html.EditorFor(x => x.LastName)
+    </div>
+    <div>
+        <input type="submit" value="Change" />
+    </div>
+}

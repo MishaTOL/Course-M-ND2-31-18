@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div>
+    @using Lab2.Models
+    @model Tuple<Student,Post>
+    @using (Html.BeginForm("EditPost", "Home", new { id = Model.Item2.Id }))
+    {
+        <p>Текущий студент: @Model.Item1.FirstName @Model.Item1.LastName</p><br />
+        <p>Заголовок поста</p>
+        @Html.TextBox("Description", Model.Item2.Description, new { @class = "form-control" })<br />
+        @Html.TextArea("Content", Model.Item2.Content, new { @class = "form-control", rows = "15", style = "width: 100%; max-width: 100%; resize: none;" })
+        <p>Введите теги если необходимо. Каждый тег должен начинаться со знака #</p>
+        @Html.TextBox("TagsStr", TempData["TagStr"], new { @class = "form-control", style = "width: 100%; max-width: 100%;" })
+        <p><input type="submit" class="btn btn-success" value="Опубликовать" /></p>
+    }
+</div>
+

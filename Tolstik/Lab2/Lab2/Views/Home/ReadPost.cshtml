@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "ReadPost";
+}
+
+@using Lab2.Models
+@model Tuple<Student, Post>
+@using (Html.BeginForm("AddComment", "Home", new { id = Model.Item2.Id } ))
+{
+    <p>Текущий студент: @Model.Item1.FirstName @Model.Item1.LastName</p><br />
+    @Model.Item2.Content
+    <div>
+        <table>
+            @foreach (var tag in Model.Item2.Tags)
+            {
+                @Html.DisplayFor(modelItem => tag.Name)
+            }
+            <hr />
+            @if (Model.Item2.Comments.Count > 0)
+            {
+                foreach (var comment in Model.Item2.Comments)
+                {
+                    <div>
+                        <tr>
+                            <i>@comment.Content</i>
+                        </tr>
+                    </div>
+                    <hr />
+                }
+            }
+            <tr>
+                @Html.TextArea("CommentText", null, new { @class = "form-control", rows = "4", style = "width: 100%; max-width: 100%; resize: none;" })
+                <input type="submit" class="btn btn-success" value="Отправить" />
+            </tr>
+        </table>
+    </div>
+    
+    
+}

@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm("ChooseOrCreateStudent", "Home", FormMethod.Post))
+{
+    <p>Введите свое имя: </p>
+    @Html.TextBox("FirstName")
+    <p>Введите свою фамилию :</p>
+    @Html.TextBox("LastName")
+    <p><input type="submit" value="Отправить" /></p>
+}

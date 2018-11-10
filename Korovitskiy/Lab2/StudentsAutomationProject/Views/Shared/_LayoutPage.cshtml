@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Students</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Custom/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="col-md-3">
+
+    </div>
+    <div class="container col-md-6">
+        <hr />
+        <h2>Students</h2>
+        <hr />
+        @RenderBody()
+
+        <div>
+            <input class="btn bg-success" type="button" value="OnBoard" onclick="location.href='@Url.Action("OnBoard", "Board")'" />
+        </div>
+        <div>
+            <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Authorization")'" />
+        </div>
+
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Scripts/jquery-3.0.0.js"></script>
+
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        @{/*<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+
+                <!-- Latest compiled and minified JavaScript -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+
+                <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/i18n/defaults-*.min.js"></script>*/
+        }
+    </div>
+    <div class="col-md-3">
+
+    </div>
+</body>
+</html>

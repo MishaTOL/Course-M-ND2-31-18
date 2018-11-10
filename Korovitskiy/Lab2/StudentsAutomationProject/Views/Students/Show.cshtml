@@ -1,0 +1,39 @@
+﻿@model PresentationModel.StudentViewModel
+
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div>
+    <h4>StudentViewModel</h4>
+    <hr />
+    <div>
+        <input type="button" value="back" onclick="location.href='@Url.Action("Students","Students")'" />
+    </div>
+    <div>
+        <input type="button" value="edit" onclick="location.href='@Url.Action("Update","Students", new { id = Model.Id})'" />
+    </div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

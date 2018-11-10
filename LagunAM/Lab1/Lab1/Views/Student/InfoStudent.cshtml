@@ -1,0 +1,27 @@
+﻿@using Lab1.Models
+@model StudentSummary
+
+
+@using (Html.BeginForm("InfoStudent", "Student"))
+{
+    @Html.ActionLink("На главную", "Index", "Student", null, null)
+    <p>Введите ID студента</p>
+    @Html.TextBox("ID", "", new { required = "required" });
+    <input type="submit" value="Просмотреть" formmethod="post">
+
+    if (Model != null)
+    {
+
+        foreach (System.Collections.Generic.KeyValuePair<string, string> Now in Lab1.Views.Student.ActionsConst.StudentPsevdonims)
+        {
+            <p><h5>@Now.Key</h5></p>
+            <p><h3>@Model.GetType().GetProperty(Now.Value).GetValue(Model)</h3></p>
+        }
+    }
+    else
+    {
+        <p>Студент не найден.</p>
+    }
+}
+
+

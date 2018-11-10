@@ -1,0 +1,15 @@
+﻿@model Students.Models.Student
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update</h2>
+<h5>Please input Student ID</h5>
+@using (Html.BeginForm("UpdateDetails", "Student", FormMethod.Post))
+{
+    @Html.LabelFor(model => model.ID) <br />
+    @Html.EditorFor(model => model.ID)
+    <input type="submit" value="Update" />
+}
+

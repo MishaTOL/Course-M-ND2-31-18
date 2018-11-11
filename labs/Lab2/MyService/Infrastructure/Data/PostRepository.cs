@@ -3,6 +3,7 @@ using Lab2.MyService.Domain.Interface;
 using Lab2.MyService.Infrastructure.Context;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -34,7 +35,7 @@ namespace Lab2.MyService.Infrastructure.Data
 
         public Post Get(int id)
         {
-            throw new NotImplementedException();
+            return db.Posts.Find(id);
         }
 
         public IEnumerable<Post> GetAll()
@@ -49,7 +50,7 @@ namespace Lab2.MyService.Infrastructure.Data
 
         public void Update(Post item)
         {
-            throw new NotImplementedException();
+            db.Entry(item).State = EntityState.Modified;
         }
     }
 }

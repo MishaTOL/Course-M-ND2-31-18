@@ -18,27 +18,67 @@ namespace Lab2.Controllers
         public HomeController()
         {
             repo = new PostRepository();
+            Mapper.Initialize(cfg => cfg.CreateMap<Post, ViewPost>());
         }
 
 
 
         public ActionResult Index()
         {
-            var posts = repo.GetAll();
-
-            if (posts.Count() == 0)
-            {
-                repo.Create(new Post() { Author = "Ivanov", Content = "Test", Created = DateTime.Now });
-                repo.Save();
-                posts = repo.GetAll();
-            }
-
             //// Настройка AutoMapper
-            //Mapper.Initialize(cfg => cfg.CreateMap<Post, IndexViewPost>());
+            
             //// сопоставление
-            //List<IndexViewPost> posts =
-            //    Mapper.Map<IEnumerable<Post>, List<IndexViewPost>>(repo.GetAll());
+            var posts =
+                Mapper.Map<IEnumerable<Post>, List<ViewPost>>(repo.GetAll());
             return View(posts);
+        }
+
+        public ActionResult Create()
+        {
+            Post post = new Post() { Author="Ivanov", Created = DateTime.Now, Content="New Content" };
+
+            return View(post);
+        }
+        [HttpPost]
+        public ActionResult Create(Post model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Настройка AutoMapper
+                //Mapper.Initialize(cfg => cfg.CreateMap<CreatPost, Post>());
+                // Выполняем сопоставление
+                //Post post = Mapper.Map<CreatPost, Post>(model);
+                repo.Create(model);
+                repo.Save();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+                return HttpNotFound();
+            Post post = repo.Get(id.Value);
+            // Настройка AutoMapper
+            //Mapper.Initialize(cfg => cfg.CreateMap<Post, EditPost>());
+            // Выполняем сопоставление
+            //EditPost post = Mapper.Map<Post, EditPost>(repo.Get(id.Value));
+            return View(post);
+        }
+        [HttpPost]
+        public ActionResult Edit(Post model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Настройка AutoMapper
+                //Mapper.Initialize(cfg => cfg.CreateMap<Post, EditPost>());
+                //// Выполняем сопоставление
+                //Post post = Mapper.Map<EditPost, Post>(model);
+                repo.Update(model);
+                repo.Save();
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         public ActionResult About()

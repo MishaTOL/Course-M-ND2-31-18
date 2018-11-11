@@ -14,5 +14,7 @@ namespace Lab2.MyService.Infrastructure.Context
         public DbSet<Tags> Tags { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Comment> Comments { get; set; }
+
+        public System.Data.Entity.DbSet<Lab2.MyService.Infrastructure.ViewCRUD.ViewPost> ViewPosts { get; set; }
     }
 }

@@ -22,13 +22,14 @@ namespace Lab2.Controllers
             return View(new CreateCommentViewModel() { PostId = postId });
         }
         [HttpPost]
-        public ActionResult Create(CreateCommentViewModel _comment)
+        public ActionResult Create(CreateCommentViewModel commentView)
         {
-            var comment = Mapper.Map<CreateCommentViewModel, Comment>(_comment);
+            var comment = Mapper.Map<CreateCommentViewModel, Comment>(commentView);
             comment.AuthorId = ((Student)Session["User"]).Id;
+            comment.Created = DateTime.Now;
             db.Comments.Add(comment);
             db.SaveChanges();
-            return RedirectToAction("Details", "Posts", new { id = _comment.PostId });
+            return RedirectToAction("Details", "Posts", new { id = commentView.PostId });
         }
         public ActionResult Edit(int id)
         {
@@ -36,9 +37,9 @@ namespace Lab2.Controllers
             return View(comment);
         }
         [HttpPost]
-        public ActionResult Edit(EditCommentViewModel _comment)
+        public ActionResult Edit(EditCommentViewModel commentView)
         {
-            var comment = Mapper.Map<EditCommentViewModel, Comment>(_comment);
+            var comment = Mapper.Map<EditCommentViewModel, Comment>(commentView);
             db.Comments.Add(comment);
             db.Entry(comment).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();

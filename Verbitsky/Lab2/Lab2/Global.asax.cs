@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab2.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,7 +18,18 @@ namespace Lab2
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Infrastructure.AutomapperWebProfile.Run();
+            AutoMapper.Mapper.Initialize(a =>
+            {
+                a.AddProfile<AutomapperCommentProfile>();
+                a.AddProfile<AutomapperPostProfile>();
+                a.AddProfile<AutomapperStudentProfile>();
+            });
+
+            //Infrastructure.AutomapperCommentProfile.Run();
+            //Infrastructure.AutomapperCommentProfile.Run();
+            //Infrastructure.AutomapperCommentProfile.Run();
+
+            //Infrastructure.AutomapperWebProfile.Run();
         }
     }
 }

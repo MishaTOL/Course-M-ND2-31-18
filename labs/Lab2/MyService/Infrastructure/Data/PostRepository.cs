@@ -19,7 +19,7 @@ namespace Lab2.MyService.Infrastructure.Data
 
         public void Create(Post item)
         {
-            throw new NotImplementedException();
+            db.Posts.Add(item);
         }
 
         public void Delete(int id)
@@ -44,7 +44,7 @@ namespace Lab2.MyService.Infrastructure.Data
 
         public void Save()
         {
-            throw new NotImplementedException();
+            db.SaveChanges();
         }
 
         public void Update(Post item)

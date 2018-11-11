@@ -26,6 +26,12 @@ namespace Lab2.Controllers
         {
             var posts = repo.GetAll();
 
+            if (posts.Count() == 0)
+            {
+                repo.Create(new Post() { Author = "Ivanov", Content = "Test", Created = DateTime.Now });
+                repo.Save();
+                posts = repo.GetAll();
+            }
 
             //// Настройка AutoMapper
             //Mapper.Initialize(cfg => cfg.CreateMap<Post, IndexViewPost>());

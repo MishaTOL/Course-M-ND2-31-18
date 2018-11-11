@@ -1,0 +1,18 @@
+﻿using Lab2.MyService.Domain.Core;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+
+namespace Lab2.MyService.Infrastructure.Context
+{
+    public class DataContext:DbContext
+    {
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Tags> Tags { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+    }
+}

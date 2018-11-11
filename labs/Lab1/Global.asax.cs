@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Lab1.Util;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +17,10 @@ namespace Lab1
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            // внедрение зависимостей
+            NinjectModule registrations = new NinjectRegistrations();
+            var kernel = new StandardKernel(registrations);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }
 }

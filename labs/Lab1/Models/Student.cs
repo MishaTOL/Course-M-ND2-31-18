@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Lab1.Models
 {
-    public class Student
+    public class Student2
     {
         public int ID { get; set; }
         public int Age { get; set; }

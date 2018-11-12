@@ -1,0 +1,27 @@
+﻿@using Domain.Contracts.ViewModel
+@model Tuple<StudentViewModel, IEnumerable<PostViewModel>>
+@{
+    ViewBag.Title = "ShowList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Greeting @Model.Item1.FirstName @Model.Item1.LastName</h2>
+<input type="button" value="Create Post" class="btn btn-primary"
+       onClick='location.href="@Url.Action("Create", "Post", new { id=Model.Item1.Id })"'
+       class="btn btn-primary" />
+@foreach (var post in Model.Item2)
+{
+    <br />
+    <hr />
+    <h3>  @Html.ActionLink(post.Title, "Show", "Post", new { studentid = Model.Item1.Id, postid = post.Id }, null)</h3>
+    <p>@post.Content</p>
+    <p>Created: @post.Author.FirstName @post.Author.LastName Data: @post.Created</p>
+    <br />
+    <p>
+        Tags: @foreach (var tag in post.Tags)
+        {
+            @String.Format("{0} ",tag.Name)
+        }
+    </p>
+}
+

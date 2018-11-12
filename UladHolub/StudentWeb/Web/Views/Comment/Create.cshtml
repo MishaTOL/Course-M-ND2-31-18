@@ -1,0 +1,26 @@
+﻿@using Domain.Contracts.ViewModel
+@model Tuple<StudentViewModel, PostViewModel, CommentViewModel>
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Post: @Model.Item2.Title. Student: @Model.Item1.FirstName @Model.Item1.LastName</h2>
+<h3>Add Comment</h3>
+<br />
+@using (Html.BeginForm("Create", "Comment", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <p>@Html.Hidden("studentId", Model.Item1.Id)</p>
+    <p>@Html.Hidden("postId", Model.Item2.Id)</p>
+    <p>@Html.HiddenFor(x => x.Item3.AuthorId)</p>
+    <p>@Html.HiddenFor(x => x.Item3.PostId)</p>
+    <p>@Html.LabelFor(x => x.Item3.Content)</p>
+    <p>@Html.TextAreaFor(x => x.Item3.Content, new { required = "required", style = "width: 100%;" })</p>
+    <p>
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="button" value="Cancel" class="btn btn-primary"
+               onClick='location.href="@Url.Action("Show", "Post", new { studentId = Model.Item1.Id, postId = Model.Item2.Id })"'>
+    </p>
+}
+

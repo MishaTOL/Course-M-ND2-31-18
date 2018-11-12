@@ -1,0 +1,78 @@
+﻿@model Lab2_Lab1.ViewModels.Post.IndexView
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+
+    @Html.DisplayFor(model => Model.NickName)
+    |
+   
+    @Html.ActionLink("Edit user", "Edit", "Student",  new Lab2_Lab1.InfoModels.PostInfo
+    {
+        StudentId = Model.StudentId,
+        NickName = Model.NickName
+    } , null)
+</p>
+
+<p>
+    @Html.ActionLink("Create New Post", "Add", new Lab2_Lab1.InfoModels.PostInfo
+    {
+        StudentId = Model.StudentId,
+        NickName = Model.NickName
+    })
+</p>
+
+<table class="table">
+
+    @if (Model.Posts != null)
+    {
+        @Html.HiddenFor(model => Model.StudentId)
+        foreach (var item in Model.Posts)
+        {
+            <tr>
+                <td>
+                    @item.Content.Substring(0, Math.Min(item.Content.Length, 25))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Details", "Index", "Comment", new Lab2_Lab1.InfoModels.CommentInfo
+                    {
+                        Content = item.Content,
+                        Created = item.Created,
+                        PostId = item.PostId,
+                        StudentId = Model.StudentId
+                    }, null)
+                    |
+                    @if (Model.StudentId == item.StudentId)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new Lab2_Lab1.ViewModels.Post.EditView
+                        {
+                            Content = item.Content,
+                            NickName = item.NickName,
+                            PostId = item.PostId,
+                            StudentId = item.StudentId,
+                            TagsString = item.TagsString
+                        })
+                    }|
+                    @if (Model.StudentId == item.StudentId)
+                    {
+                        @Html.ActionLink("Delete", "Delete", new Lab2_Lab1.InfoModels.PostInfo
+                        {
+                            StudentId = item.StudentId,
+                            NickName = item.NickName,
+                            PostId = item.PostId
+                        })
+                        
+                    }
+                </td>
+            </tr>
+}
+    }
+
+
+</table>

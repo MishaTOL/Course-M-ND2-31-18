@@ -4,21 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Data.Contracts.Entities;
-using Data.Contracts.Repositories;
-using MyDependencyInjectionContainer;
+using Domain.Contracts.Services;
 
 namespace Web.Controllers
 {
     public class StudentController : Controller
     {
-        private IStudentRepository studentRepository;
-        public StudentController(IStudentRepository studentRepository)
+        private IStudentService studentService;
+        public StudentController(IStudentService studentService)
         {
-            this.studentRepository = studentRepository;
+            this.studentService = studentService;
         }
         public ActionResult Index()
         {
-            return View(studentRepository.Read());
+            return View(studentService.Read());
         }
         public ActionResult Create()
         {
@@ -27,28 +26,28 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Create(Student student)
         {
-            studentRepository.Create(student);
+            studentService.Create(student);
             return View(student);
         }
         public ActionResult Update()
         {
-            return View(studentRepository.Read());
+            return View(studentService.Read());
         }
         [HttpPost]
         public ActionResult Update(Student student)
         {
-            studentRepository.Update(student);
-            return View(studentRepository.Read());
+            studentService.Update(student);
+            return View(studentService.Read());
         }
         public ActionResult Delete()
         {
-            return View(studentRepository.Read());
+            return View(studentService.Read());
         }
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            studentRepository.Delete(id);
-            return View(studentRepository.Read());
+            studentService.Delete(id);
+            return View(studentService.Read());
         }
     }
 }

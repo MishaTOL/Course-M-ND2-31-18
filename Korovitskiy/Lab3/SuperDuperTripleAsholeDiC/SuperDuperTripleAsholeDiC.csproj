@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DIContainer.cs" />
+    <Compile Include="Container\DIContainer.cs" />
+    <Compile Include="Container\IContainer.cs" />
     <Compile Include="Registrator\IRegistrator.cs" />
     <Compile Include="Rsolver\IResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

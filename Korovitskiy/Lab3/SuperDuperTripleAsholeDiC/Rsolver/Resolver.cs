@@ -8,18 +8,18 @@ namespace SuperDuperTripleAsholeDiC
 {
     public class Resolver: IResolver
     {
-        private DIContainer container;
+        private IContainer container;
 
-        public Resolver(DIContainer container)
+        public Resolver(IContainer container)
         {
             this.container = container;
         }
 
-        public Parent GetImplementation<Parent>() where Parent: class
+        public ParentType GetImplementation<ParentType>() where ParentType: class
         {
-            Type childType = this.container.DependencyContainer[typeof(Parent)];
+            Type childType = this.container.DependencyContainer[typeof(ParentType)];
             var obj = childType.GetConstructor(new Type[] { }).Invoke(new object[] { });
-            return (Parent)obj;
+            return (ParentType)obj;
         }
     }
 }

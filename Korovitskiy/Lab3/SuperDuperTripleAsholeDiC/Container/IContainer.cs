@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SuperDuperTripleAsholeDiC
 {
-    public interface IRegistrator
+    public interface IContainer
     {
-        void SetDependency<ParentType, ChildType>() where ParentType : class where ChildType : ParentType, new();
+        Dictionary<Type, Type> DependencyContainer { get; set; }
     }
 }

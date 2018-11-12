@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace SuperDuperTripleAsholeDiC
 {
-    public class DIContainer
+    public class DIContainer : IContainer
     {
         private static object syncObject = new object();
-        private static DIContainer container;
+        private static IContainer container;
 
         private DIContainer()
         {
             DependencyContainer = new Dictionary<Type, Type>();
         }
 
-        public static DIContainer GetContainer()
+        public static IContainer GetContainer()
         {
             lock (syncObject)
             {
@@ -26,6 +26,6 @@ namespace SuperDuperTripleAsholeDiC
             return container;
         }
 
-        public Dictionary<Type, Type> DependencyContainer;
+        public Dictionary<Type, Type> DependencyContainer { get; set; }
     }
 }

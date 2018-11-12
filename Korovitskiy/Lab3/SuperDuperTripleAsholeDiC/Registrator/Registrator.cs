@@ -8,21 +8,24 @@ namespace SuperDuperTripleAsholeDiC
 {
     public class Registrator : IRegistrator
     {
-        private DIContainer container;
+        private IContainer container;
 
-        internal Registrator(DIContainer container)
+        internal Registrator(IContainer container)
         {
             this.container = container;
         }
 
-        public void SetDependency<Parent, Child>() where Parent : class where Child : Parent, new()
+        public void SetDependency<ParentType, ChildType>() where ParentType : class where ChildType : ParentType, new()
         {
-            Child child = new Child();
-            Parent parent = child as Parent;
-            if (parent == null)
-                throw new Exception(nameof(Child) + " does not imlement " + nameof(parent));
+            ChildType child = new ChildType();
+            ParentType parent = child as ParentType;
 
-            this.container.DependencyContainer.Add(typeof(Parent), typeof(Child));
+            if (parent == null)
+                throw new Exception(typeof(ChildType) + " does not imlement " + typeof(ParentType));
+            if (this.container.DependencyContainer.ContainsKey(typeof(ParentType)))
+                throw new Exception(typeof(ParentType) + " already has implementation ");
+
+            this.container.DependencyContainer.Add(typeof(ParentType), typeof(ChildType));
 
         }
     }

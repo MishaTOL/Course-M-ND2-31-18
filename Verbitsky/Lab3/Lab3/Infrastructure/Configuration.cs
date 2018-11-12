@@ -11,9 +11,9 @@ namespace Web.Infrastructure
     {
         public static void Configure(IContainer container)
         {
+            container.Bind<IStudentRepository>().With<StudentRepository>();
             container.Bind<StudentController>().With<StudentController>();
             container.Bind<IStudentService>().With<StudentService>();
-            container.Bind<IStudentRepository>().With<StudentRepository>();
         }
     }
 }

@@ -1,0 +1,14 @@
+﻿@using Lab_1.Models
+
+@model Student[]
+
+    @foreach (Student item in Model)
+    {
+        <div>
+            <h5><strong>id:</strong> @item.Id</h5>
+            <h5><strong>FirstName:</strong> @item.FirstName</h5>
+            <h5><strong>LastName:</strong> @item.LastName</h5>
+            <hr />
+        </div>
+    }
+

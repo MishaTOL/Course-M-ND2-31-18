@@ -8,6 +8,6 @@ namespace SuperDuperTripleAsholeDiC
 {
     public interface IRegistrator
     {
-        void SetDependency<ParentType, ChildType>() where ParentType : class where ChildType : ParentType, new();
+        void SetDependency<ParentType, ChildType>() where ChildType : ParentType;
     }
 }

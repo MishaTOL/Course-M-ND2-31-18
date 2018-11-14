@@ -8,6 +8,6 @@ namespace SuperDuperTripleAsholeDiC
 {
     public interface IResolver
     {
-        ParentType GetImplementation<ParentType>() where ParentType : class;
+        ParentType GetImplementation<ParentType>();
     }
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SuperDuperTripleAsholeDiC
+namespace ExampleConsole
 {
-    public interface IContainer
+    public interface IIncludeTestInterface
     {
-        IDictionary<Type, Type> DependencyContainer { get; set; }
+        string GetString();
     }
 }

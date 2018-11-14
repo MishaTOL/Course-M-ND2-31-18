@@ -26,6 +26,6 @@ namespace SuperDuperTripleAsholeDiC
             return container;
         }
 
-        public Dictionary<Type, Type> DependencyContainer { get; set; }
+        public IDictionary<Type, Type> DependencyContainer { get; set; }
     }
 }

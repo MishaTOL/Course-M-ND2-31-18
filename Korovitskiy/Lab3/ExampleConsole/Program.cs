@@ -11,9 +11,13 @@ namespace ExampleConsole
     {
         static void Main(string[] args)
         {
-            SuperDuperDependencies.SetDependency<ITestInterface, TestClass2>();
+            IRegistrator registrator = new Registrator(DIContainer.GetContainer());
+            registrator.SetDependency<ITestInterface, TestClass2>();
+            registrator.SetDependency<IIncludeTestInterface, IncludeTestClass2>();
 
-            ITestInterface exampleObject = SuperDuperDependencies.GetImplementation<ITestInterface>();
+            IResolver resolver = new Resolver(DIContainer.GetContainer());
+            var exampleObject = resolver.GetImplementation<ITestInterface>();
+            
             Console.WriteLine(exampleObject.GetString());
             Console.Read();
         }

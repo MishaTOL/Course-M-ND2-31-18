@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ExampleConsole
 {
-    class TestClass1 : ITestInterface
+    public class IncludeTestClass2 : IIncludeTestInterface
     {
         public string GetString()
         {
-            return "This is test class1";
+            return "Test2";
         }
     }
 }

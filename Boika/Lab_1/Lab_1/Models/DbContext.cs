@@ -59,17 +59,17 @@ namespace Lab_1.Models
 
         public void Delete(int id)
         {
-            var list = new List<Student>();
+            var listStudents = new List<Student>();
             
             foreach(var item in Read())
             {
                 if (item.Id != id)
                 {
-                    list.Add(item);
+                    listStudents.Add(item);
                 }
             }
 
-            var json = JsonConvert.SerializeObject(list.ToArray());
+            var json = JsonConvert.SerializeObject(listStudents.ToArray());
             File.WriteAllText(path, json);
         }
     }

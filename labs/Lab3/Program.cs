@@ -13,13 +13,13 @@ namespace Lab3
 
         static void Main(string[] args)
         {
+
             IUnityContainer objContainer = new UnityContainer();
             objContainer.RegisterType<Customer>();
             objContainer.RegisterType<IDal, MSSQLDal>();
             objContainer.RegisterType<IDal, OracleDal>();
             Customer obj = objContainer.Resolve<Customer>();
             obj.CustomerName = "test1";
-            //Customer obj = new Customer(new MSSQLDal()) { CustomerName = "test1" };
             obj.Add(obj.CustomerName);
 
         }

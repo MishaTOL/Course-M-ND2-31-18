@@ -1,6 +1,7 @@
-﻿
+﻿using Lab1.core.Data;
+using Lab1.core.Interface;
+using Lab1.Models;
 using Newtonsoft.Json;
-using OnionApp.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,19 +16,13 @@ namespace Lab1.Controllers
     public class HomeController : Controller
     {
 
-        IStudentRepository repo;
-
-        public HomeController(IStudentRepository r)
-        {
-            repo = r;
-        }
-
-
+        IRepository<Student> repository = new StudentRepository();
         // GET: Home
         public ActionResult Index()
         {
             //
-            var students = repo.GetStudentList();
+            IEnumerable<Student> students = repository.GetAll();
+            //
             return View(students);
         }
 
@@ -35,23 +30,25 @@ namespace Lab1.Controllers
         public ActionResult Create()
         {
             //
-            //Student student = new Student() { Age = 17, FirstName = "Alex", LastName = "M" };
-            ////
-            //return View(new Student() { Age = student.Age, FirstName = student.FirstName, LastName = student.LastName });
-            return View(new Student());
+            Student student = new Student() { Age = 17, FirstName = "Alex", LastName = "M" };
+            //
+            return View(student);
         }
 
         [HttpPost]
         public ActionResult Create(Student newstudent)
         {
-            repo.Create(newstudent);
-            repo.Save();
+            //
+            repository.Create(newstudent);
+            //
             return RedirectToAction("Index", "Home");
         }
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View(repo.GetStudent(id));
+            Student student = repository.Get(id);
+
+            return View(student);
         }
 
 
@@ -59,8 +56,7 @@ namespace Lab1.Controllers
         public ActionResult Delete(int id, FormCollection formCollection)
         {
             //
-            repo.Delete(id);
-            repo.Save();
+            repository.Delete(id);
             //
             return RedirectToAction("Index", "Home");
         }
@@ -68,33 +64,24 @@ namespace Lab1.Controllers
 
         public ActionResult Details(int id)
         {
-            return View(repo.GetStudent(id));
+            Student student = repository.Get(id);
+
+            return View(student);
         }
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            Student student = repo.GetStudent(id);
+            //
+            Student student = repository.Get(id);
             return View(student);
         }
-        //[HttpPost]
-        //public ActionResult Edit(Student editstudent)
-        //{
-        //    //
-        //    //string file_path = Server.MapPath("~/Files/Students.json");
-        //    ////
-        //    //List<Student> students = System.IO.File.Exists(file_path) ? JsonConvert.DeserializeObject<List<Student>>(System.IO.File.ReadAllText(file_path)) : new List<Student>();
-        //    //// 
-        //    //List<Student> newstudents = new List<Student>();
-        //    ////
-        //    //foreach (var item in students)
-        //    //{
-        //    //    if (item.ID != editstudent.ID) newstudents.Add(item);
-        //    //    else newstudents.Add(editstudent);
-        //    //}
-        //    ////
-        //    //System.IO.File.WriteAllText(file_path, JsonConvert.SerializeObject(newstudents));
+        [HttpPost]
+        public ActionResult Edit(Student student)
+        {
+            //
+            repository.Update(student);
 
-        //    //return RedirectToAction("Index", "Home");
-        //}
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

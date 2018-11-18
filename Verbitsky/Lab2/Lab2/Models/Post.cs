@@ -21,11 +21,6 @@ namespace Lab2.Models
         [DataType(DataType.DateTime)]
         public DateTime Created { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-        //public virtual ICollection<TagsPosts> TagsPosts { get; set; }
         public virtual ICollection<Tags> Tags { get; set; }
-        public Post()
-        {
-            Created = DateTime.Now;
-        }
     }
 }

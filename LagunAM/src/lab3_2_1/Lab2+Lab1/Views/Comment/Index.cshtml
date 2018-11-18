@@ -1,0 +1,64 @@
+﻿@model Lab2_Lab1.ViewModels.Comment.IndexView
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@Html.ActionLink("Add Comment", "Add", new Lab2_Lab1.InfoModels.CommentInfo
+{
+    PostId = Model.PostId,
+    StudentId = Model.StudentId
+})
+@Html.HiddenFor(model => Model.StudentId)
+@Html.HiddenFor(Model => Model.PostId)
+
+<table class="table">
+    <tr>
+        <td>
+            @Html.DisplayFor(model => Model.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(model => Model.Created)
+        </td>
+
+    </tr>
+
+    @foreach (var item in Model.Comments)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new Lab2_Lab1.InfoModels.CommentInfo
+                {
+                    PostId = Model.PostId,
+                    StudentId = Model.StudentId,
+                    Content = item.Content,
+                    Created = item.Created,
+                    CommentId = item.CommentId
+                }) |
+                @Html.ActionLink("Delete", "Delete", new Lab2_Lab1.InfoModels.CommentInfo
+                {
+                    PostId = Model.PostId,
+                    StudentId = Model.StudentId,
+                    Content = item.Content,
+                    Created = item.Created,
+                    CommentId = item.CommentId
+
+                })
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.ActionLink("Back to List", "Index", "Post", new Lab2_Lab1.InfoModels.PostInfo
+    {
+        StudentId = Model.StudentId
+    }, null)
+</div>

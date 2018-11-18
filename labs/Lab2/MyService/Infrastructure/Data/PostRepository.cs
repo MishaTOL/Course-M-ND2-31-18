@@ -1,4 +1,5 @@
-﻿using Lab2.MyService.Domain.Core;
+﻿using Lab2.Models;
+
 using Lab2.MyService.Domain.Interface;
 using Lab2.MyService.Infrastructure.Context;
 using System;
@@ -25,7 +26,8 @@ namespace Lab2.MyService.Infrastructure.Data
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Post post = db.Posts.Find(id);
+            db.Posts.Remove(post);
         }
 
         public void Dispose()

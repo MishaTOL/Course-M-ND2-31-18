@@ -1,4 +1,5 @@
-﻿using Lab2.MyService.Domain.Core;
+﻿using Lab2.Models;
+
 using Lab2.MyService.Domain.Interface;
 using System;
 using System.Collections.Generic;

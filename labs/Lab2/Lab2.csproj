@@ -221,12 +221,12 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="MyService\Domain\Core\Comment.cs" />
-    <Compile Include="MyService\Domain\Core\Post.cs" />
-    <Compile Include="MyService\Domain\Core\Student.cs" />
-    <Compile Include="MyService\Domain\Core\Tags.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Tags.cs" />
     <Compile Include="MyService\Domain\Interface\ICommentRepository.cs" />
     <Compile Include="MyService\Domain\Interface\IPostRepository.cs" />
     <Compile Include="MyService\Domain\Interface\IRepository.cs" />

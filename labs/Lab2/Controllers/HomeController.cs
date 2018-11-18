@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Lab2.MyService.Domain.Core;
+using Lab2.Models;
 using Lab2.MyService.Domain.Interface;
 using Lab2.MyService.Infrastructure.Data;
 using Lab2.MyService.Infrastructure.ViewCRUD;
@@ -13,23 +13,14 @@ namespace Lab2.Controllers
 {
     public class HomeController : Controller
     {
-        IRepository<Post> repo;
-
-        public HomeController()
-        {
-            repo = new PostRepository();
-            Mapper.Initialize(cfg => cfg.CreateMap<Post, ViewPost>());
-        }
+        IRepository<Post> repository = new PostRepository();
 
 
 
         public ActionResult Index()
         {
-            //// Настройка AutoMapper
-            
-            //// сопоставление
-            var posts =
-                Mapper.Map<IEnumerable<Post>, List<ViewPost>>(repo.GetAll());
+            IEnumerable<Post> posts = repository.GetAll();
+
             return View(posts);
         }
 
@@ -44,12 +35,10 @@ namespace Lab2.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Настройка AutoMapper
-                //Mapper.Initialize(cfg => cfg.CreateMap<CreatPost, Post>());
-                // Выполняем сопоставление
-                //Post post = Mapper.Map<CreatPost, Post>(model);
-                repo.Create(model);
-                repo.Save();
+
+                repository.Create(model);
+                repository.Save();
+
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -58,11 +47,8 @@ namespace Lab2.Controllers
         {
             if (id == null)
                 return HttpNotFound();
-            Post post = repo.Get(id.Value);
-            // Настройка AutoMapper
-            //Mapper.Initialize(cfg => cfg.CreateMap<Post, EditPost>());
-            // Выполняем сопоставление
-            //EditPost post = Mapper.Map<Post, EditPost>(repo.Get(id.Value));
+            Post post = repository.Get(id.Value);
+
             return View(post);
         }
         [HttpPost]
@@ -70,12 +56,9 @@ namespace Lab2.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Настройка AutoMapper
-                //Mapper.Initialize(cfg => cfg.CreateMap<Post, EditPost>());
-                //// Выполняем сопоставление
-                //Post post = Mapper.Map<EditPost, Post>(model);
-                repo.Update(model);
-                repo.Save();
+
+                repository.Update(model);
+                repository.Save();
                 return RedirectToAction("Index");
             }
             return View(model);

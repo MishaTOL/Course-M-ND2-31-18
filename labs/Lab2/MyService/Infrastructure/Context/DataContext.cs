@@ -1,4 +1,5 @@
-﻿using Lab2.MyService.Domain.Core;
+﻿using Lab2.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ namespace Lab2.MyService.Infrastructure.Context
 {
     public class DataContext:DbContext
     {
+        public DataContext() : base("DefaultConnection") { }
         public DbSet<Post> Posts { get; set; }
 
         public DbSet<Tags> Tags { get; set; }

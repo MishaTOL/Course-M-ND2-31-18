@@ -1,5 +1,6 @@
 ﻿
-using Lab2.MyService.Domain.Core;
+using Lab2.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

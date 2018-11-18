@@ -1,4 +1,4 @@
-﻿using Lab2.MyService.Domain.Core;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

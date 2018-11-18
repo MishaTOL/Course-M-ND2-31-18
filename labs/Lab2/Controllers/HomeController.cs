@@ -64,6 +64,38 @@ namespace Lab2.Controllers
             return View(model);
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+                return HttpNotFound();
+            Post post = repository.Get(id.Value);
+
+            return View(post);
+
+
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+                return HttpNotFound();
+            Post post = repository.Get(id.Value);
+
+            return View(post);
+        }
+        [HttpPost]
+        public ActionResult Delete(Post model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                repository.Delete(model.Id);
+                repository.Save();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

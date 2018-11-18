@@ -1,0 +1,22 @@
+﻿@using Domain.Contracts.Entity
+@model StudentViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Student</h2>
+@using (Html.BeginForm("Create", "Student", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <p>@Html.HiddenFor(x=>x.Id)</p>
+    <p>@Html.LabelFor(x => x.FirstName)</p>
+    <p>@Html.TextBoxFor(x => x.FirstName, new { required = "required", style = "width: 100%;" })</p>
+    <p>@Html.LabelFor(x => x.LastName)</p>
+    <p>@Html.TextBoxFor(x => x.LastName, new { required = "required", style = "width: 100%;" })</p>
+    <p>
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="button" value="Cancel" onClick='location.href="@Url.Action("Show", "Student")"'class="btn btn-primary" />
+    </p>
+}
+

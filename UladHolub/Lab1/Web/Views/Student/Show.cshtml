@@ -1,0 +1,29 @@
+﻿@using Domain.Contracts.Entity
+@model IEnumerable<StudentViewModel>
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Hi!</h2>
+@using (Html.BeginForm("Update", "Student", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h4>Students:</h4>
+        <select name="studentId" size="20" required style="width:100%">
+            @foreach (var elem in Model)
+            {
+                <option value="@elem.Id">@elem.FirstName @elem.LastName</option>
+            }
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Create" onClick='location.href="@Url.Action("Create", "Student")"'class="btn btn-primary" />
+        <input type="submit" value="Update" formaction=@Url.Action("Update") formmethod="post" class="btn btn-primary" />
+        <input type="submit" value="Delete" formaction=@Url.Action("Delete") formmethod="post" class="btn btn-primary" />
+    </div>
+}

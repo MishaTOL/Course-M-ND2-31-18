@@ -1,0 +1,32 @@
+﻿@using Lab2.Web.Models
+@model IEnumerable<CommentViewModel>
+
+@{
+    Layout = null;
+}
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Author.FirstName)
+                @Html.DisplayFor(modelitem => item.Author.LastName)
+            </td>
+            <td>
+                @Html.HiddenFor(modelitem=>item.StudentId)
+                @Html.HiddenFor(modelItem => item.PostId)
+                </td>
+        </tr>           
+    }
+</table>
+
+
+
+
+
+
+

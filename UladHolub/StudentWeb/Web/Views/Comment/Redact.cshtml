@@ -1,0 +1,24 @@
+﻿@using Domain.Contracts.ViewModel
+@model CommentViewModel
+@{
+    ViewBag.Title = "Redact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Post: @Model.Post.Title. Student: @Model.Author.FirstName @Model.Author.LastName</h2>
+<h3>Add Comment</h3>
+<br />
+@using (Html.BeginForm("Redact", "Comment", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <p>@Html.HiddenFor(x => x.Id)</p>
+    <p>@Html.HiddenFor(x => x.AuthorId)</p>
+    <p>@Html.HiddenFor(x => x.PostId)</p>
+    <p>@Html.LabelFor(x => x.Content)</p>
+    <p>@Html.TextAreaFor(x => x.Content, new { required = "required", style = "width: 100%;" })</p>
+    <p>
+        <input type="submit" value="Accept" class="btn btn-primary" />
+        <input type="button" value="Cancel" class="btn btn-primary"
+               onClick='location.href="@Url.Action("Show", "Post", new { studentId = Model.AuthorId, postId = Model.PostId })"'>
+    </p>
+}

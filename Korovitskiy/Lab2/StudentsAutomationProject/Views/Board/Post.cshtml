@@ -1,0 +1,83 @@
+﻿@model PresentationModel.PostViewModel
+
+@{
+    ViewBag.Title = "Post";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    var user = (PresentationModel.StudentViewModel)Session["studentLogin"];
+}
+
+<div>
+    @Html.HiddenFor(x => x.Id, new { @id = "post_id" })
+    <div class="row">
+        @Html.TextAreaFor(modelItem => Model.Content, new { @class = "form-control text-block", @readonly = "", @disabled = "", @id = "postContent" })
+    </div>
+    <div class="row">
+        <div class="text-sm-right col-md-12">
+            @if (Model.Tags == null || Model.Tags.Count() == 0)
+            {
+                <a href="#" class="btn text-black-50 btn-sm disabled" role="button" aria-disabled="true">no tags</a>
+            }
+            @foreach (var tag in Model.Tags)
+            {
+                <em>
+                    <small>
+                        <a href="#" class="btn text-black-50 btn-sm disabled" role="button" aria-disabled="true">@tag.Name</a>
+                    </small>
+                </em>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-sm-left col-md-2">
+            @{
+                if (user != null && user.Id == Model.StudentId)
+                {
+                    <div id="btn_edit_post" class="text-sm-left col-md-2">
+                        <input class="btn btn-sm btn-secondary" type="button" name="name" value="edit" onclick="editPost()" />
+                    </div>
+                    <div id="btn_apply_post" class="text-sm-left col-md-2" style="display:none">
+                        <input class="btn btn-sm btn-secondary" type="button" name="name" value="apply" onclick="applyPost(@Model.Id)" />
+                    </div>
+                }
+            }
+        </div>
+        <div class="text-sm-right col-md-10">
+            <em><small>@Html.DisplayFor(modelItem => Model.Signature)</small></em>
+        </div>
+    </div>
+    <br>
+    <div>
+        @foreach (var comment in Model.Comments)
+        {
+        <div class="row comment" id="comment_@comment.Id">
+            <div class="col-md-6 offset-md-3">
+                @Html.TextAreaFor(modelItem => comment.Content, new { @class = "form-control text-block", @readonly = "", @disabled = "", @rows = 1 })
+                <div class="text-sm-right">
+                    <em><small>@Html.DisplayFor(x => comment.Signature)</small></em>
+                </div>
+            </div>
+            @{
+                if (user != null && user.Id == comment.StudentId)
+                {
+                    <div class="col-md-1 btn_edit_comment">
+                        <input class="btn btn-sm btn-secondary" type="button" name="name" value="edit" onclick="editComment(@comment.Id)" />
+                    </div>
+                    <div class="col-md-1 btn_apply_comment" style="display:none">
+                        <input class="btn btn-sm btn-secondary" type="button" name="name" value="apply" onclick="applyComment(@comment.Id)" />
+                    </div>
+
+
+                    <div class=" col-md-1">
+                        <input class="btn btn-sm btn-secondary" type="button" name="name" value="delete" onclick="deleteComment(@comment.Id)" />
+                    </div>
+                }
+            }
+        </div>
+        }
+    </div>
+    <div>
+        @{Html.RenderPartial("_comment", new Students.ServicesModel.CommentInfo() { PostId = Model.Id });}
+    </div>
+
+    <script src="~/Scripts/Custom/post.js"></script>
+</div>

@@ -1,0 +1,67 @@
+﻿@model Tuple<StudentNewsSite.Domain.ViewModels.StudentViewModel, IEnumerable<StudentNewsSite.Domain.ViewModels.PostViewModel>>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<h3>Current Student:</h3>
+@Html.DisplayFor(model => model.Item1.FirstName)
+@Html.DisplayFor(model => model.Item1.LastName)
+
+<p>
+    @Html.ActionLink("Create New", "Create", Model.Item1)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item2.FirstOrDefault().Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item2.FirstOrDefault().Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item2.FirstOrDefault().Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item2.FirstOrDefault().Tags)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Item2)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.FirstName)
+                @Html.DisplayFor(modelItem => item.Author.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @foreach (var tag in item.Tags)
+                {
+                    @Html.DisplayFor(t=>tag.Name)
+                    @(" ")
+                }
+            </td>
+            <td>
+                @Html.ActionLink(" Read ", "Read", new { id = item.Id })
+                @{
+                    if (item.Author.Id == Model.Item1.Id)
+                    {
+                        @Html.ActionLink(" Edit ", "Edit", new { id = item.Id })
+                        @Html.ActionLink(" Delete ", "Delete", new { id = item.Id })
+                    }
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+

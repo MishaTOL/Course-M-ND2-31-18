@@ -16,9 +16,5 @@ namespace Lab2.Models
         public DateTime Created { get; set; }
         public virtual int PostId { get; set; }
         public virtual Post Post { get; set; }
-        public Comment()
-        {
-            Created = DateTime.Now;
-        }
     }
 }

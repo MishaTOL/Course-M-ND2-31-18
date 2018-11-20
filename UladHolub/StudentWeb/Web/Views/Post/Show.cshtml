@@ -1,0 +1,53 @@
+﻿@using Domain.Contracts.ViewModel
+@model Tuple<StudentViewModel, PostViewModel>
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Greeting @Model.Item1.FirstName @Model.Item1.LastName</h2>
+@if (Model.Item1.Id == Model.Item2.AuthorId)
+{
+    <input type="button" value="Redact Post"
+           onClick='location.href="@Url.Action("Redact", "Post", new { studentId=Model.Item1.Id, postID = Model.Item2.Id })"'
+           class="btn btn-primary" />
+    <input type="button" value="Delete Post"
+           onClick='location.href="@Url.Action("Delete", "Post", new { studentId=Model.Item1.Id, postID = Model.Item2.Id })"'
+           class="btn btn-primary" />
+}
+<br />
+<hr />
+<h3>@Model.Item2.Title</h3>
+<p>@Model.Item2.Content</p>
+<p>Created: @Model.Item2.Author.FirstName @Model.Item2.Author.LastName Data: @Model.Item2.Created</p>
+<br />
+<p>
+    Tags: @foreach (var tag in @Model.Item2.Tags)
+    {
+        @String.Format("{0} ", tag.Name)
+    }
+</p>
+<input type="button" value="Add Comment"
+       onClick='location.href="@Url.Action("Create", "Comment", new { studentId=Model.Item1.Id, postID = Model.Item2.Id })"'
+       class="btn btn-primary" />
+
+@foreach (var comment in Model.Item2.Comments)
+{
+    <br />
+    <hr />
+    <h5>@comment.Author.FirstName @comment.Author.LastName:</h5>
+    <p>@comment.Content</p>
+    <p>Created: @comment.Created</p>
+    if (Model.Item1.Id == comment.AuthorId)
+    {
+        <input type="button" value="Redact Comment"
+               onClick='location.href="@Url.Action("Redact", "Comment", new { studentId=Model.Item1.Id, commentId = comment.Id })"'
+               class="btn btn-primary" />
+        <input type="button" value="Delete Comment"
+               onClick='location.href=
+               "@Url.Action("Delete", "Comment", new { studentId=Model.Item1.Id, postId = Model.Item2.Id, commentId = comment.Id })"'
+               class="btn btn-primary" />
+    }
+    <br />
+}
+

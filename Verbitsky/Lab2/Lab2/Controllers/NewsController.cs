@@ -22,18 +22,18 @@ namespace Lab2.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(IndexStudentViewModel _student)
+        public ActionResult Index(IndexStudentViewModel studentView)
         {
             var user = db.Students
-                .Where(a => a.FirstName == _student.FirstName && a.LastName == _student.LastName)
+                .Where(a => a.FirstName == studentView.FirstName && a.LastName == studentView.LastName)
                 .SingleOrDefault();
             if(user == null)
             {
-                var student = Mapper.Map<IndexStudentViewModel, Student>(_student);
+                var student = Mapper.Map<IndexStudentViewModel, Student>(studentView);
                 db.Students.Add(student);
                 db.SaveChanges();
                 user = db.Students
-                    .Where(a => a.FirstName == _student.FirstName && a.LastName == _student.LastName)
+                    .Where(a => a.FirstName == studentView.FirstName && a.LastName == studentView.LastName)
                     .SingleOrDefault();
             }
             Session["User"] = user;

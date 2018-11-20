@@ -1,0 +1,21 @@
+﻿@using Domain.Contracts.ViewModel
+@model StudentViewModel
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sign in please</h2>
+@using (Html.BeginForm("Registration", "Student", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <p>@Html.HiddenFor(x => x.Id)</p>
+    <p>@Html.LabelFor(x => x.FirstName)</p>
+    <p>@Html.TextBoxFor(x => x.FirstName, new { required = "required", style = "width: 100%;" })</p>
+    <p>@Html.LabelFor(x => x.LastName)</p>
+    <p>@Html.TextBoxFor(x => x.LastName, new { required = "required", style = "width: 100%;" })</p>
+    <p>
+        <input type="submit" value="Sign in" class="btn btn-primary" />
+    </p>
+}
+

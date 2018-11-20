@@ -11,7 +11,7 @@ namespace Lab2.Controllers
 {
     public class PostsController : Controller
     {
-        private NewsStudentDbContext db = new NewsStudentDbContext();
+        private NewsStudentDbContext db;
         public PostsController()
         {
             db = new NewsStudentDbContext();
@@ -26,58 +26,40 @@ namespace Lab2.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(CreatePostViewModel _post)
+        public ActionResult Create(CreatePostViewModel postView)
         {
-            string tags = _post.Tags;
-            _post.Tags = null;
-
-            var post = Mapper.Map<CreatePostViewModel, Post>(_post);
+            string tags = postView.Tags;
+            var post = Mapper.Map<CreatePostViewModel, Post>(postView);
             post.AuthorId = ((Student)Session["User"]).Id;
             db.Posts.Add(post);
-            db.SaveChanges();
-            post = db.Entry(post).Entity;
-
+            post.Created = DateTime.Now;
+            if(post.Tags == null)
+            {
+                post.Tags = new List<Tags>();
+            }
             foreach (var tag in tags.Split(' ').Distinct())
             {
                 var buf = db.Tags.Where(a => a.Name == tag).SingleOrDefault();
                 if(buf == null)
                 {
-                    db.Tags.Add(new Tags() { Name = tag });
-                    db.SaveChanges();
-                    buf = db.Tags.Where(a => a.Name == tag).SingleOrDefault();
+                    buf = new Tags() { Name = tag };
+                    db.Tags.Add(buf);
                 }
                 post.Tags.Add(buf);
             }
             db.SaveChanges();
-
-            //foreach (var tag in tags.Split(' ').Distinct())
-            //{
-            //    var buf = db.Tags.Where(a => a.Name == tag).SingleOrDefault();
-            //    db.TagsPosts.Add((buf == null)
-            //        ? new TagsPosts() {
-            //            Tags = new Tags() { Name = tag },
-            //            IdPost = post.Id,
-            //            Post = post
-            //        }
-            //        : new TagsPosts() {
-            //            IdTag = buf.Id,
-            //            Tags = buf,
-            //            IdPost = post.Id,
-            //            Post = post
-            //        });
-            //    db.SaveChanges();
-            //}
             return RedirectToAction("Index");
         }
         public ActionResult Edit(int id)
         {
-            var post = Mapper.Map<Post, EditPostViewModel>(db.Posts.Where(a => a.Id == id).SingleOrDefault());
+            var postEntity = db.Posts.Where(a => a.Id == id).SingleOrDefault();
+            var post = Mapper.Map<Post, EditPostViewModel>(postEntity);
             return View(post);
         }
         [HttpPost]
-        public ActionResult Edit(EditPostViewModel _post)
+        public ActionResult Edit(EditPostViewModel postView)
         {
-            var post = Mapper.Map<EditPostViewModel, Post>(_post);
+            var post = Mapper.Map<EditPostViewModel, Post>(postView);
             db.Posts.Add(post);
             db.Entry(post).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
@@ -85,12 +67,13 @@ namespace Lab2.Controllers
         }
         public ActionResult Details(int id)
         {
-            var post = Mapper.Map<Post, DetailsPostViewModel>(db.Posts
+            var postEntity = db.Posts
                 .Include("Author")
                 .Include("Comments")
                 .Include("Tags")
                 .Where(a => a.Id == id)
-                .SingleOrDefault());
+                .SingleOrDefault();
+            var post = Mapper.Map<Post, DetailsPostViewModel>(postEntity);
             return View(post);
         }
         public ActionResult Delete(int id)
@@ -98,7 +81,6 @@ namespace Lab2.Controllers
             var post = new Post { Id = id };
             db.Posts.Attach(post);
             db.Posts.Remove(post);
-            //db.TagsPosts.RemoveRange(db.TagsPosts.Where(a => a.Post.Id == post.Id));
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,0 +1,1 @@
+﻿Нужно указать путь для json файла (Data.Repositories.StudentRepository.cs)

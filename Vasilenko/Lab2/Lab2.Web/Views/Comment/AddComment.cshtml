@@ -1,0 +1,26 @@
+﻿@model Lab2.Web.Models.CommentViewModel
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddComment", "Comment", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div>@Html.HiddenFor(model=>model.StudentId)</div>
+    <div>@Html.HiddenFor(model => model.PostId)</div>
+    <div>@Html.HiddenFor(model => model.Author)</div>
+    <div>   
+    <p>
+            @Html.TextAreaFor(model => model.Content)
+        </p>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+        </div>
+}
+

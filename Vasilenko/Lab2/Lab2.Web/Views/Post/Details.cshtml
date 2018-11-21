@@ -1,0 +1,57 @@
+﻿@model Lab2.Web.Models.PostViewModel
+
+
+@{
+    ViewBag.Title = "Details";
+
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <div> @Html.HiddenFor(model => model.Id) </div>
+
+    <p>
+        @Html.ActionLink("Edit", "Update", new { postId = Model.Id }) |
+        @Html.ActionLink("Back to Posts", "Posts", new { studentId = Model.Author.Id })
+    </p>
+    <dl class="dl-horizontal">       
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayTextFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+    </dl>
+</div>
+
+<h3>Comments</h3>
+
+        <div> @Html.Action("GetComments","Comment", new { postId = Model.Id, studentId = Model.Author.Id }) </div>
+           <div>   @Html.Action("AddComment", "Comment", new { postId = Model.Id, studentId = Model.Author.Id }) </div>
+        <div> @Html.Action("GetTags","Tag", new { postId = Model.Id } )</div>
+        <div> @Html.Action("AddTag", "Tag", new { postId = Model.Id }) </div>
+
+
+
+
+

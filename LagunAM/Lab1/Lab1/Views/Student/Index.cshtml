@@ -1,0 +1,14 @@
+﻿
+@using (Html.BeginForm("Index", "Student", FormMethod.Get))
+{
+    <h2>
+        <label>Welcome to students database. Select an action.</label>
+    </h2>
+    foreach (System.Collections.Generic.KeyValuePair<string, string> Now in Lab1.Views.Student.ActionsConst.ActiveActions)
+    {
+        <li>
+             @Html.ActionLink(Now.Key, Now.Value, "Student", null, null)
+        </li>
+    }   
+}
+

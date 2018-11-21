@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Laba2.Models.PostModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<p></p>
+<p>
+    @Html.ActionLink("Create news", "Create",null, new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreate)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { postId = item.PostId }, new { @class = "btn btn-default" })
+            @if (item.OperationRecord == true)
+            {
+                @Html.ActionLink("Edit", "Edit", new { postId = item.PostId }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", new { postId = item.PostId }, new { @class = "btn btn-default" })
+            }
+        </td>
+    </tr>
+}
+
+</table>

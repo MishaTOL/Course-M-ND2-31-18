@@ -1,0 +1,27 @@
+﻿@using Lab_1.Models
+@model Student[]
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Label("Id")
+    <br />
+    <input type="text" name="Id">
+    <br />
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+@foreach (Student item in Model)
+{
+    <div>
+        <h5><strong>Id:</strong> @item.Id</h5>
+        <h5><strong>FirstName:</strong> @item.FirstName</h5>
+        <h5><strong>LastName:</strong> @item.LastName</h5>
+        <hr />
+    </div>
+}
+

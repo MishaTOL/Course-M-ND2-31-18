@@ -1,0 +1,35 @@
+﻿@using Domain.Contracts.ViewModel
+@model Tuple<StudentViewModel, PostViewModel>
+@{
+    ViewBag.Title = "Redact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Redact Post. Student: @Model.Item1.FirstName @Model.Item1.LastName</h2>
+<br />
+@using (Html.BeginForm("Redact", "Post", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <p>@Html.Hidden("id", Model.Item1.Id)</p>
+    <p>@Html.HiddenFor(x => x.Item2.Id)</p>
+    <p>@Html.HiddenFor(x => x.Item2.AuthorId)</p>
+    <p>@Html.LabelFor(x => x.Item2.Title)</p>
+    <p>@Html.TextBoxFor(x => x.Item2.Title, new { required = "required" })</p>
+    <p>@Html.LabelFor(x => x.Item2.Content)</p>
+    <p>@Html.TextAreaFor(x => x.Item2.Content, new { required = "required", style = "width: 100%;" })</p>
+    <p>@Html.Label("Tags:")</p>
+    {
+        string tagString = String.Empty;
+        foreach (var tag in Model.Item2.Tags)
+        {
+            tagString += String.Format("{0} ", tag.Name);
+        }
+        <p>@Html.TextBox("tagString", tagString, new { required = "required" })</p>
+    }
+    <p>
+        <input type="submit" value="Accept" class="btn btn-primary"/>
+        <input type="button" value="Cancel" class="btn btn-primary"
+               onClick='location.href="@Url.Action("ShowList", "Post", new { id = @Model.Item1.Id })"'>
+    </p>
+}
+

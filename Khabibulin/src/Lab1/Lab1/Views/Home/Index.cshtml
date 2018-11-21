@@ -1,0 +1,51 @@
+﻿@model Lab1.Models.Students
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Students</h2>
+
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (ViewBag.students != null)
+        {
+            foreach (var item in ViewBag.students)
+            {
+                <tr>
+                    <td>  @item.ID </td>
+                    <td>  @item.Firstname </td>
+                    <td>  @item.Lastname </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+@using (Html.BeginForm("MyAction", "Home", FormMethod.Post))
+{
+    @:Enter ID
+    @Html.TextBox("ID")
+
+    @:Enter Firsname
+    @Html.TextBox("Firstname")
+
+    @:Enter Lastname
+    @Html.TextBox("Lastname")
+
+    <input type="submit" name="submitButtonCreate" value="Create" />
+    <input type="submit" name="submitButtonDelete" value="Delete" />
+    <input type="submit" name="submitButtonUpdate" value="Update" />
+}
+
+
+

@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/packages/EntityFramework.6.1.3/tools
+
+/Trial/packages
+/Trial/Data.Contracts/bin
+/Trial/Data.Contracts/obj
+/Trial/Data.Repositories/bin
+/Trial/Data.Repositories/obj
+/Trial/.vs
+/Trial/Domain.Contracts/bin
+/Trial/Domain.Contracts/obj
+/Trial/Domain.Services/bin
+/Trial/Domain.Services/obj
+/Trial/Trial.web/bin
+/Trial/Trial.web/obj

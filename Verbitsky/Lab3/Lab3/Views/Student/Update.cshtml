@@ -1,0 +1,31 @@
+﻿<h2>Update Student</h2>
+@using Data.Contracts.Entities;
+@model List<Student>
+
+@using (Html.BeginForm("Update", "Student", FormMethod.Post))
+{
+    <h3>Enter id for delete</h3>
+    <div>
+        @Html.Label("id")
+        <input type="text" name="id" />
+    </div>
+    <div>
+        @Html.Label("New FirsName")
+        <input type="text" name="FirstName" />
+    </div>
+    <div>
+        @Html.Label("New LastName")
+        <input type="text" name="LastName" />
+    </div>
+    <div>
+        @Html.Label("New Age")
+        <input type="text" name="Age" />
+    </div>
+    <input type="submit" value="Update" />
+}
+<br />
+<hr />
+<br />
+@{
+    Html.RenderPartial("ListOfStudentsPartial");
+}

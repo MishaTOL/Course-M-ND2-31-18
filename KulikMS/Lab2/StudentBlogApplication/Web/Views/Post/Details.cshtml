@@ -1,0 +1,59 @@
+﻿@model Domain.Contracts.Models.PostView
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index", new { authorId = Model.AuthorId })
+    </p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+
+        <dd>
+            #@string.Join(", #", Model.Tags.Select(t => t.Name))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+    </dl>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.ActionLink("Add Comment", "Create", "Comment", new { postId = Model.Id }, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="col-md-10">
+            @Html.Partial("~/Views/Comment/Index.cshtml", Model.Comments.OrderBy(c => c.Created))
+        </div>
+    </div>
+    @*@{ Html.RenderAction("Index", "Comment", new { postId = Model.Id, authorId = Model.AuthorId }); }*@
+</div>
+

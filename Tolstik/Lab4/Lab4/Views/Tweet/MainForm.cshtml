@@ -1,0 +1,39 @@
+﻿@*@using Lab4.Models
+    @model List<Tweet>
+    <div>
+        @using (Html.BeginForm("CreateTweet", "Tweet", FormMethod.Post))
+        {
+            <div>
+                @Html.TextArea("Content", null, new { @class = "form-control", maxlength = 240, rows = "2", style = "width: 100%; max-width: 100%; resize: none;" })
+            </div>
+            <div>
+                <input type="submit" value="Tweet it" class="btn btn-primary" />
+            </div>
+            <hr />
+            <div>
+                @foreach (var item in Model)
+                {
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Content)
+                        @Html.DisplayFor(modelItem => item.DateOfCreation)
+                    </div>
+                }
+            </div>
+        }*@
+
+@{
+    ViewBag.Title = "MainForm";
+}
+<html>
+<head>
+</head>
+<body>
+    <div id="content"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+    <script src='@Url.Content("~/Scripts/app.jsx")'></script>
+</body>
+</html>
+
+

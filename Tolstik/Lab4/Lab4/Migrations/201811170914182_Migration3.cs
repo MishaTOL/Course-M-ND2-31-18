@@ -1,0 +1,18 @@
+namespace Lab4.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class Migration3 : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.Tweets", "DateOfCreation", c => c.DateTime(nullable: false));
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.Tweets", "DateOfCreation");
+        }
+    }
+}

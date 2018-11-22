@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Lab3.Models.Student> 
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <title>Список студентов</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-pull-4">
+            <h2>Список студентов</h2><br>
+            <table class="table table-hover table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id студента</th>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                    </tr>
+                </thead>
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.StudentId</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                            </tr>
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+

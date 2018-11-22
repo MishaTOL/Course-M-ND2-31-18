@@ -1,0 +1,89 @@
+﻿@model WebAppLab1.Models.Students
+@{
+    ViewBag.Title = "Home Page";
+}
+<html>
+<head>
+    <title>Список студентов</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-pull-4">
+            <h2>Список студентов</h2><br>
+            <table class="table table-fixed">
+                <thead>
+                    <tr>
+                        <th width="50">Id</th>
+                        <th width="200">Имя</th>
+                        <th width="200">Фамилия</th>
+                    </tr>
+                </thead>
+                @{
+                    foreach (var item in ViewBag.Students)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td width="100">
+                                    @Html.ActionLink("Смотреть", "Details", new { id = item.Id })
+                                </td>
+                                <td width="100">
+                                    @Html.ActionLink("Изменить", "Edit", new { id = item.Id })
+                                </td>
+                                <td width="100">
+                                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                }
+            </table>
+            <br />
+            <div>
+                <h4>
+                    @Html.ActionLink("Создать новую запись", "Create", "Home", new { @class = "btn btn-primary" })
+                </h4>
+            </div>
+        </div>
+        <br />
+
+        <div class="col-md-push-4">
+            <table>
+                <tr>
+                    <th><h4 style="color:blueviolet">Данные Students -> JSON</h4></th>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.StudentsToJson
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
+        <div class="col-md-push-4">
+            <table>
+                <tr>
+                    <th><h4 style="color:blueviolet">Данные JSON -> Students</h4></th>
+                </tr>
+            </table>
+            <table>
+                @{
+                    foreach (var item in ViewBag.JsonToStudents)
+                    {
+                        <tr>
+                            <td width="50" class="text-left">@item.Id</td>
+                            <td width="200" class="text-left">@item.FirstName</td>
+                            <td width="200" class="text-left">@item.LastName</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+

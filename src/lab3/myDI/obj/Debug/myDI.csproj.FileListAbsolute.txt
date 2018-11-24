@@ -1,0 +1,5 @@
+C:\Users\b00001174\Documents\Visual Studio 2017\Projects\Labs\myDI\bin\Debug\myDI.dll
+C:\Users\b00001174\Documents\Visual Studio 2017\Projects\Labs\myDI\bin\Debug\myDI.pdb
+C:\Users\b00001174\Documents\Visual Studio 2017\Projects\Labs\myDI\obj\Debug\myDI.csproj.CoreCompileInputs.cache
+C:\Users\b00001174\Documents\Visual Studio 2017\Projects\Labs\myDI\obj\Debug\myDI.dll
+C:\Users\b00001174\Documents\Visual Studio 2017\Projects\Labs\myDI\obj\Debug\myDI.pdb

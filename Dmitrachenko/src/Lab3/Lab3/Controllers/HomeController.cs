@@ -1,16 +1,17 @@
 ﻿using Lab3.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Ninject;
+using Lab3.Util;
+using System.ComponentModel;
 
 namespace Lab3.Controllers
 {
     public class HomeController : Controller
     {
-        IRepository repository;
+        
+        public object repository = (IRepository)System.Web.HttpContext.Current.Application["repository"];
+
+        public HomeController() { }
 
         public HomeController(IRepository repo)
         {
@@ -19,7 +20,7 @@ namespace Lab3.Controllers
 
         public ActionResult Index()
         {
-            return View(repository.List());
+            return View(((IRepository)repository).List());
         }
     }
 }

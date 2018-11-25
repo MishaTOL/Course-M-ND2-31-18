@@ -11,10 +11,10 @@ namespace Lab3.Util
     {
         public override void Load()
         {
-            //MS SQL Server
-            Bind<IRepository>().To<StudentRepository>();
+            //Подключение для работы с MS SQL Server
+            //Bind<IRepository>().To<StudentRepository>();
 
-            //JSON File
+            //Подключение для работы с JSON File
             //Bind<IRepository>().To<StudentFileRepository>();
         }
     }

@@ -1,51 +1,46 @@
-﻿using Data.Implementation.Models;
+﻿using AutoMapper;
+using Data.Contracts.Models;
+using Data.Implementation.Models;
+using DomainContracts.Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Domain.Implementation.Service
 {
-    class TweetService
+    public class TweetService
     {
-        TweetRepository repository;
-        public TweetService()
+        private readonly TweetRepository repository;
+        private readonly IMapper mapper;
+        public TweetService(ApplicationDbContext context, IMapper mapper)
         {
-            repository = new TweetRepository();
+            repository = new TweetRepository(context);
+            this.mapper = mapper;
         }
-
-        public List<TweetViewModel> GetPosts()
+        public List<TweetViewModel> Get()
         {
-            List<PostViewModel> output = new List<PostViewModel>();
-            var posts = repository.Read();
-            output = Mapper.Map<List<PostEntity>, List<PostViewModel>>(posts);
-            foreach (var item in posts)
-            {
-                var model = Mapper.Map<PostEntity, PostViewModel>(item);
-                output.Add(model);
-            }
+            var tweetEntities = repository.Read();
+            var tweetsView = mapper.Map<IEnumerable<TweetEntity>, IEnumerable<TweetViewModel>>(tweetEntities).ToList();
+            return tweetsView;
+        }
+        public TweetViewModel GetsById(int id)
+        {
+            var view = repository.Read(id);
+            var output = mapper.Map<TweetEntity, TweetViewModel>(view);
             return output;
         }
-
-        public PostViewModel GetPostById(int id)
+        public void Create(TweetViewModel view, string userId)
         {
-            var model = repository.Read(id);
-            var output = Mapper.Map<PostEntity, PostViewModel>(model);
-            return output;
+            var entity = mapper.Map<TweetViewModel, TweetEntity>(view);
+            repository.Create(entity);
         }
-
-        public void CreatePost(PostViewModel post)
+        public void Edit(TweetViewModel tweet)
         {
-            var model = Mapper.Map<PostViewModel, PostEntity>(post);
-            repository.Create(model);
+            var entity = mapper.Map<TweetViewModel, TweetEntity>(tweet);
+            repository.Update(entity);
         }
-
-        public void EditPost(PostViewModel post)
-        {
-            var model = Mapper.Map<PostViewModel, PostEntity>(post);
-            repository.Update(model);
-        }
-
-        public void DeletePost(int id)
+        public void Delete(int id)
         {
             repository.Delete(id);
         }

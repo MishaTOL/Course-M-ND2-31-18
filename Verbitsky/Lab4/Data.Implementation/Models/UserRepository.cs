@@ -10,9 +10,9 @@ namespace Data.Implementation.Models
     public class UserRepository
     {
         private readonly ApplicationDbContext context;
-        public UserRepository()
+        public UserRepository(ApplicationDbContext context)
         {
-            context = new ApplicationDbContext();
+            this.context = context;
         }
         public void Create(UserEntity user)
         {

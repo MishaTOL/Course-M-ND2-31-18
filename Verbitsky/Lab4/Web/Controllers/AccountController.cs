@@ -4,19 +4,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Data.Contracts.Models;
+using DomainContracts.Models.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Web.Models;
-using Web.Models.ViewModel;
 
 namespace Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
+        private readonly UserManager<UserEntity> userManager;
+        private readonly SignInManager<UserEntity> signInManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -31,17 +31,15 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Login, FirstName = model.FirstName, LastName = model.LastName };
-                // добавляем пользователя
-
+                UserEntity user = new UserEntity { Email = model.Email, UserName = model.Login, FirstName = model.FirstName, LastName = model.LastName };
+                
                 string password = SendMail(model.Email, model.Login);
                 var result = await userManager.CreateAsync(user, password);
 
                 if (result.Succeeded)
                 {
-                    // установка куки
-                    await signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                    //await signInManager.SignInAsync(user, false);
+                    return RedirectToAction("RegisterSucceeded");
                 }
                 else
                 {
@@ -52,6 +50,11 @@ namespace Web.Controllers
                 }
             }
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult RegisterSucceeded()
+        {
+            return View();
         }
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
@@ -90,34 +93,6 @@ namespace Web.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Login");
-        }
-
-
-        private string SendMail(string mail, string userName)
-        {
-            MailAddress fromMailAddress = new MailAddress("aspmvclab4@gmail.com", "aspmvclab4");
-            MailAddress toMailAddress = new MailAddress(mail, userName);
-
-            string password = Guid.NewGuid().ToString("d").Substring(1, 8);
-
-            using (MailMessage mailMessage = new MailMessage(fromMailAddress, toMailAddress))
-            {
-                using (SmtpClient smtpClient = new SmtpClient())
-                {
-                    mailMessage.Subject = "Register on Lab4";
-                    mailMessage.Body = $"Your password: {password}";
-
-                    smtpClient.Host = "smtp.gmail.com";
-                    smtpClient.Port = 587;
-                    smtpClient.EnableSsl = true;
-                    smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    smtpClient.UseDefaultCredentials = false;
-                    smtpClient.Credentials = new NetworkCredential(fromMailAddress.Address, "lab4546369364");
-
-                    smtpClient.Send(mailMessage);
-                }
-            }
-            return password;
         }
     }
 }

@@ -10,9 +10,9 @@ namespace Data.Implementation.Models
     public class TweetRepository
     {
         private readonly ApplicationDbContext context;
-        public TweetRepository()
+        public TweetRepository(ApplicationDbContext context)
         {
-            context = new ApplicationDbContext();
+            this.context = context;
         }
         public void Create(TweetEntity tweet)
         {

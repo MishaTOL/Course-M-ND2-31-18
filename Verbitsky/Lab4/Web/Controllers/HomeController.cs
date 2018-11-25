@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Data.Contracts.Models;
+using Data.Implementation.Models;
+using Domain.Implementation.Service;
+using DomainContracts.Models.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Web.Models;
-using Web.Models.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Web.Controllers
@@ -17,64 +19,52 @@ namespace Web.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext context;
-        private readonly IMapper mapper;
-        private readonly UserManager<User> userManager;
-        public HomeController(ApplicationDbContext context, UserManager<User> userManager, IMapper mapper)
+        private readonly UserManager<UserEntity> userManager;
+        private readonly TweetService tweetService;
+        public HomeController(ApplicationDbContext context, UserManager<UserEntity> userManager, IMapper mapper)
         {
             this.context = context;
-            this.mapper = mapper;
             this.userManager = userManager;
+            this.tweetService = new TweetService(context, mapper);
         }
         public IActionResult Index()
         {
-            var tweets = context.Tweets.Take(20).Include(a => a.Author).AsEnumerable();
-            var tweetsView = mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetViewModel>>(tweets);
-            return View(tweetsView);
+            var tweets = tweetService.Get();
+            return View(tweets);
         }
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(TweetViewModel tweetView)
+        public IActionResult Create(TweetViewModel tweet)
         {
-            var tweet = mapper.Map<TweetViewModel, Tweet>(tweetView);
-            var user = await userManager.GetUserAsync(User);
-            tweet.Author = user;
-            context.Tweets.Add(tweet);
-            context.SaveChanges();
+            var user = userManager.GetUserId(User);
+            tweetService.Create(tweet, user);
             return RedirectToAction("Index");
         }
-        public ActionResult Delete(int Id)
+        public ActionResult Delete(int id)
         {
-            var tweet = new Tweet() { Id = Id };
-            context.Attach(tweet);
-            context.Tweets.Remove(tweet);
-            context.SaveChanges();
+            tweetService.Delete(id);
             return RedirectToAction("Index");
         }
-        public ActionResult Edit(int Id)
+        public ActionResult Edit(int id)
         {
-            var tweet = context.Tweets.Find(Id);
-            var tweetView = mapper.Map<Tweet, TweetViewModel>(tweet);
-            return View(tweetView);
+            var tweet = tweetService.GetsById(id);
+            return View(tweet);
         }
         [HttpPost]
-        public ActionResult Edit(TweetViewModel tweetView)
+        public ActionResult Edit(TweetViewModel tweet)
         {
-            var tweet = mapper.Map<TweetViewModel, Tweet>(tweetView);
-            context.Attach(tweet);
-            var entry = context.Entry(tweet);
-            entry.Property(e => e.Content).IsModified = true;
-            context.SaveChanges();
+            tweetService.Edit(tweet);
             return RedirectToAction("Index");
         }
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

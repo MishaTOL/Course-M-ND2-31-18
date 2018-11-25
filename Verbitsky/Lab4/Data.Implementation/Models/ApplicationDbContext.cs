@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Data.Implementation.Models
 {
-    public public class ApplicationDbContext : IdentityDbContext<UserEntity>
+    public class ApplicationDbContext : IdentityDbContext<UserEntity>
     {
         public virtual DbSet<TweetEntity> Tweets { get; set; }
-        public ApplicationDbContext()
-            : base()
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
             Database.EnsureCreated();
         }

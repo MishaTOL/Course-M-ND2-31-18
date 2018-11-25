@@ -26,11 +26,7 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            var id = userManager.GetUserId(User);
             var tweets = tweetService.Get();
-
-            var list = tweets.Where(a => a.AuthorId == id);
-
             return View(tweets);
         }
         public IActionResult Create()

@@ -1,0 +1,38 @@
+﻿body {
+}
+
+.chat {
+    font-size: 12px;
+    background: lightgrey;
+    border-radius: 5px;
+    margin-top: 50px;
+    padding: 3px;
+    height: 400px;
+}
+
+#chatInputButton {
+    margin-left: 5px;
+}
+
+#messageContainer {
+}
+.messages {
+    max-height: 380px;
+    width: 580px;
+    overflow: auto;
+    position: absolute;
+    left: 30px;
+    bottom: 50px;
+}
+
+.chatInputArea .input-group {
+    margin-top: 5px;
+    width: 100%;
+}
+
+    .chatInputArea .input-group input {
+    width:70%;
+    }
+    .chatInputArea .input-group button {
+    margin-left:5px;
+    }

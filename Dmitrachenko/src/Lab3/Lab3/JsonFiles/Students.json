@@ -1,1 +1,27 @@
-[{"Id":1,"FirstName":"Николай","LastName":"Смирнов"},{"Id":2,"FirstName":"Сергей","LastName":"Иванов"},{"Id":3,"FirstName":"Дмитрий","LastName":"Алексеев"},{"Id":4,"FirstName":"Александр","LastName":"Дмитриев"},{"Id":5,"FirstName":"Николай","LastName":"Беляев"}]
+[
+  {
+    "StudentId": 1,
+    "FirstName": "Николай",
+    "LastName": "Смирнов"
+  },
+  {
+    "StudentId": 2,
+    "FirstName": "Сергей",
+    "LastName": "Иванов"
+  },
+  {
+    "StudentId": 3,
+    "FirstName": "Дмитрий",
+    "LastName": "Алексеев"
+  },
+  {
+    "StudentId": 4,
+    "FirstName": "Александр",
+    "LastName": "Дмитриев"
+  },
+  {
+    "StudentId": 5,
+    "FirstName": "Николай",
+    "LastName": "Беляев"
+  }
+]

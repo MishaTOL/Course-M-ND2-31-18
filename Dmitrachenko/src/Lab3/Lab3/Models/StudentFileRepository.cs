@@ -1,16 +1,16 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Web;
+using System.Web.Hosting;
 
 namespace Lab3.Models
 {
     public class StudentFileRepository : IDisposable, IRepository
     {
-        string fileName = System.Web.HttpContext.Current.Request.MapPath(@"~/JsonFiles/Students.json");
+        //readonly string fileName = HttpContext.Current.Request.MapPath(@"~/JsonFiles/Students.json");
+        readonly string fileName = HostingEnvironment.MapPath(@"~/JsonFiles/Students.json");
 
         public List<Student> db = new List<Student>();
 

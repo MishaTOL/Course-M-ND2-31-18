@@ -12,11 +12,4 @@ namespace Lab3.Models
 
         public DbSet<Student> Students { get; set; }
     }
-
-    public interface IRepository
-    {
-        void Save(Student student);
-        IEnumerable<Student> List();
-        Student Get(int id);
-    }
 }

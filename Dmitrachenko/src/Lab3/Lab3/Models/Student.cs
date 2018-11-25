@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Lab3.Models
 {
     public class Student
     {
+        public Student() { }
+
         [Display(Name = "ID студента")]
         public int StudentId { get; set; }
 

@@ -1,11 +1,12 @@
 ﻿using Data.Contracts.Models;
-using Data.Implementation.Models;
+using Data.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
-namespace Data.Implementation.Models
+namespace Data.Implementation
 {
     public class TweetRepository
     {
@@ -21,7 +22,8 @@ namespace Data.Implementation.Models
         }
         public IEnumerable<TweetEntity> Read()
         {
-            return context.Tweets.ToList();
+            var list = context.Tweets.Include(a => a.Author).ToList();
+            return list;
         }
         public TweetEntity Read(int id)
         {

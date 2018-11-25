@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Data.Contracts.Models;
 using DomainContracts.Models.ViewModel;
 using Microsoft.AspNetCore.Identity;
@@ -21,6 +16,7 @@ namespace Web.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
+
         [HttpGet]
         public IActionResult Register()
         {
@@ -33,7 +29,7 @@ namespace Web.Controllers
             {
                 UserEntity user = new UserEntity { Email = model.Email, UserName = model.Login, FirstName = model.FirstName, LastName = model.LastName };
                 
-                string password = SendMail(model.Email, model.Login);
+                string password = Web.Models.EmailSender.SendMail(model.Email, model.Login);
                 var result = await userManager.CreateAsync(user, password);
 
                 if (result.Succeeded)
@@ -71,7 +67,6 @@ namespace Web.Controllers
                     await signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    // проверяем, принадлежит ли URL приложению
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);

@@ -1,11 +1,11 @@
 ﻿using Data.Contracts.Models;
-using Data.Implementation.Models;
+using Data.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Data.Implementation.Models
+namespace Data.Implementation
 {
     public class UserRepository
     {
@@ -23,7 +23,7 @@ namespace Data.Implementation.Models
         {
             return context.Users.ToList();
         }
-        public UserEntity Read(int id)
+        public UserEntity Read(string id)
         {
             return context.Users.Find(id);
         }

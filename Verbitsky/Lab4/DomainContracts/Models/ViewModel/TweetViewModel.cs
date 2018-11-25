@@ -20,5 +20,6 @@ namespace DomainContracts.Models.ViewModel
         public string Content { get; set; }
         [Required]
         public string Author { get; set; }
+        public string AuthorId { get; set; }
     }
 }

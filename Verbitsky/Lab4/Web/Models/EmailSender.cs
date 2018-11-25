@@ -9,7 +9,7 @@ namespace Web.Models
 {
     public static class EmailSender
     {
-        private static string SendMail(string mail, string userName)
+        public static string SendMail(string mail, string userName)
         {
             MailAddress fromMailAddress = new MailAddress("aspmvclab4@gmail.com", "aspmvclab4");
             MailAddress toMailAddress = new MailAddress(mail, userName);
@@ -21,7 +21,7 @@ namespace Web.Models
                 using (SmtpClient smtpClient = new SmtpClient())
                 {
                     mailMessage.Subject = "Register on Lab4";
-                    mailMessage.Body = $"Your password: {password}";
+                    mailMessage.Body = $"Your Login: {userName} {Environment.NewLine}Your password: {password}";
 
                     smtpClient.Host = "smtp.gmail.com";
                     smtpClient.Port = 587;

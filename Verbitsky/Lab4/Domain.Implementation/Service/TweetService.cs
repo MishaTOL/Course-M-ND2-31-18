@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Data.Contracts.Models;
-using Data.Implementation.Models;
+using Data.Implementation;
 using DomainContracts.Models.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,10 +12,12 @@ namespace Domain.Implementation.Service
     public class TweetService
     {
         private readonly TweetRepository repository;
+        private readonly UserRepository userRepository;
         private readonly IMapper mapper;
         public TweetService(ApplicationDbContext context, IMapper mapper)
         {
             repository = new TweetRepository(context);
+            userRepository = new UserRepository(context);
             this.mapper = mapper;
         }
         public List<TweetViewModel> Get()
@@ -30,9 +32,10 @@ namespace Domain.Implementation.Service
             var output = mapper.Map<TweetEntity, TweetViewModel>(view);
             return output;
         }
-        public void Create(TweetViewModel view, string userId)
+        public void Create(TweetViewModel view)
         {
             var entity = mapper.Map<TweetViewModel, TweetEntity>(view);
+            entity.Author = userRepository.Read(view.AuthorId);
             repository.Create(entity);
         }
         public void Edit(TweetViewModel tweet)

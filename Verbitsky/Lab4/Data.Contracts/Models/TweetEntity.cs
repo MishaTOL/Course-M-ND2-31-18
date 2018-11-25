@@ -11,6 +11,5 @@ namespace Data.Contracts.Models
         public string Head { get; set; }
         public string Content { get; set; }
         public UserEntity Author { get; set; }
-        public int AuthorId { get; set; }
     }
 }

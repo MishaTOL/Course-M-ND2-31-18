@@ -4,7 +4,7 @@ using DomainContracts.Models.ViewModel;
 
 namespace Web.Infrastructure
 {
-    public class AutomapperTweetProfile : AutoMapper.Profile
+    public class AutomapperTweetProfile : Profile
     {
         public AutomapperTweetProfile()
         {
@@ -21,12 +21,6 @@ namespace Web.Infrastructure
                 .ForPath(a => a.Head, a => a.MapFrom(b => b.Head))
                 .ForPath(a => a.Content, a => a.MapFrom(b => b.Content))
                 .ForAllOtherMembers(a => a.Ignore());
-        }
-        public static void Run()
-        {
-            Mapper.Initialize(a => {
-                a.AddProfile<AutomapperTweetProfile>();
-            });
         }
     }
 }

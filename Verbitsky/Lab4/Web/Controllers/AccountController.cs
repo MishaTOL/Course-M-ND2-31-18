@@ -34,7 +34,6 @@ namespace Web.Controllers
 
                 if (result.Succeeded)
                 {
-                    //await signInManager.SignInAsync(user, false);
                     return RedirectToAction("RegisterSucceeded");
                 }
                 else

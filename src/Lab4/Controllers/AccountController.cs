@@ -12,6 +12,7 @@ using System.Security.Claims;
 
 namespace Lab4.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private ApplicationUserManager UserManager

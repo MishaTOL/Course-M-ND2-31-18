@@ -10,8 +10,8 @@ namespace Lab4
         {
 
             // настройка логина, пароля отправителя
-            var from = "somemail@yandex.ru";
-            var pass = "password12";
+            var from = "xbestya@yandex.ru";
+            var pass = "";
 
             SmtpClient client = new SmtpClient("smtp.yandex.ru", 25);
 

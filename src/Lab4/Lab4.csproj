@@ -328,7 +328,7 @@
     <Compile Include="App_Start\ApplicationContext.cs" />
     <Compile Include="App_Start\ApplicationUser.cs" />
     <Compile Include="App_Start\ApplicationUserManager.cs" />
-    <Compile Include="Infrastructure\AccessDeniedAuthorizeAttribute.cs" />
+    <Compile Include="Infrastructure\MyAuthorizeAttribute.cs" />
     <Compile Include="Infrastructure\MyAuthAttribute.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />

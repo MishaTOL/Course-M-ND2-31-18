@@ -11,12 +11,23 @@ namespace Lab4.Infrastructure
     {
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            throw new NotImplementedException();
+            var user = filterContext.HttpContext.User;
+            if (user == null || !user.Identity.IsAuthenticated)
+            {
+                filterContext.Result = new HttpUnauthorizedResult();
+            }
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
-            throw new NotImplementedException();
+            var user = filterContext.HttpContext.User;
+            if (user == null || !user.Identity.IsAuthenticated)
+            {
+                filterContext.Result = new RedirectToRouteResult(
+                    new System.Web.Routing.RouteValueDictionary {
+                    { "controller", "Account" }, { "action", "Login" }
+                   });
+            }
         }
     }
 }

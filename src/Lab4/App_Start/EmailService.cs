@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Configuration;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
@@ -8,21 +9,22 @@ namespace Lab4
     {
         public Task SendAsync(IdentityMessage message)
         {
-
-            // настройка логина, пароля отправителя
-            var from = "xbestya@yandex.ru";
-            var pass = "";
-
             SmtpClient client = new SmtpClient("smtp.yandex.ru", 25);
+            //SmtpClient client = new SmtpClient("lotus.asb.by", 25);
 
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential(from, pass);
+            client.Credentials = new System.Net.NetworkCredential(
+                ConfigurationManager.AppSettings["mailAccount"],
+                ConfigurationManager.AppSettings["mailPassword"]
+                );
             client.EnableSsl = true;
 
-            var mail = new MailMessage(from, message.Destination);
-            mail.Subject = message.Subject;
-            mail.Body = message.Body;
+            var mail = new MailMessage(
+                ConfigurationManager.AppSettings["mailAccount"], 
+                message.Destination, 
+                message.Subject, 
+                message.Body);
             mail.IsBodyHtml = true;
 
             return client.SendMailAsync(mail);

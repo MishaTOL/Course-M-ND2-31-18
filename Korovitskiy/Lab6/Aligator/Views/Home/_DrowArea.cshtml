@@ -1,0 +1,41 @@
+﻿
+<link href="~/css/style.css" rel="stylesheet" />
+
+
+<canvas id="drower" width="600" height="400"></canvas>
+<div class="inputWord" hidden="hidden">
+    <span>input word:</span>
+    <input class="inputText form-control" type="text" name="name" value="" />
+    <input class="inputButton" type="button" name="name" value="Apply" />
+</div>
+<div class="controls" hidden="hidden">
+    <ul>
+        <li class="red selected"></li>
+        <li class="blue"></li>
+        <li class="yellow"></li>
+    </ul>
+    <button id="revealColorSelect">New Color</button>
+    <div id="colorSelect" style="display: block;">
+        <span id="newColor" style="background-color: rgb(0, 0, 0);"></span>
+        <div class="sliders">
+            <p>
+                <label for="red">Red</label>
+                <input id="red" name="red" type="range" min="0" max="255" value="0">
+            </p>
+            <p>
+                <label for="green">Green</label>
+                <input id="green" name="green" type="range" min="0" max="255" value="0">
+            </p>
+            <p>
+                <label for="blue">Blue</label>
+                <input id="blue" name="blue" type="range" min="0" max="255" value="0">
+            </p>
+        </div>
+        <div>
+            <button id="addNewColor">Add Color</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/drow.js"></script>
+

@@ -1,5 +1,7 @@
-﻿@{
+﻿@model SelectList
+@{
     ViewData["Title"] = "Crocodile";
+
 }
 
 <div>
@@ -11,6 +13,11 @@
     <div id="entrance" style="margin-top: 10px;">
         <label for="name">Enter your name:</label>
         <input type="text" id="name" />
+
+        <div class="col-md-10">
+            @Html.DropDownList("Groups", Model, htmlAttributes: new { @class = "dropDownList" })
+        </div>
+
         <button onclick="Register()">Continue</button>
     </div>
 
@@ -24,8 +31,7 @@
         <ul id="messages"></ul>
     </div>
 
-    <script src="~/js/Register.js"></script>
     <script src="~/js/signalr.min.js"></script>
-    <script src="~/js/CanvasConnection.js"></script>
-    <script src="~/js/ChatConnection.js"></script>
+    <script src="~/js/Register.js"></script>
+    <script src="~/js/Connection.js"></script>
 </div>

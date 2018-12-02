@@ -25,8 +25,7 @@ namespace Lab6Crocodile
         {
             app.UseSignalR(routes =>
             {
-                routes.MapHub<CanvasHub>("/canvas");
-                routes.MapHub<ChatHub>("/chat");
+                routes.MapHub<CrocodileHub>("/hub");
             });
             app.UseHttpsRedirection();
             app.UseStaticFiles();

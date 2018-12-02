@@ -1,27 +1,31 @@
-﻿@{ 
-    Layout = null;
+﻿@{
+    ViewData["Title"] = "Crocodile";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Crocodile</title>
-</head>
-<body>
-    <canvas id="myCanvas" width="350" height="250"
-            style="background-color:#eee; border: 1px solid #ccc; margin:10px;">
+<div>
+    <canvas id="myCanvas" width="600" height="350"
+            style="background-color:#eee; border: 1px solid #ccc; margin-top: 10px; margin-bottom: 10px; display: none">
         Ваш браузер не поддерживает Canvas
     </canvas>
 
-    <div id="inputForm">
-        <input type="text" id="message" />
-        <input type="button" id="sendBtn" value="Отправить" />
+    <div id="entrance" style="margin-top: 10px;">
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" />
+        <button onclick="Register()">Continue</button>
     </div>
-    <div id="chatroom"></div>
 
+    <div id="chat" style="display: none">
+        <h3 id="spn-name"></h3>
+        <form id="frm-send-message" action="#">
+            <label for="message">Message:</label>
+            <input type="text" id="message" />
+            <input type="submit" id="send" value="Send" class="send" />
+        </form>
+        <ul id="messages"></ul>
+    </div>
+
+    <script src="~/js/Register.js"></script>
     <script src="~/js/signalr.min.js"></script>
     <script src="~/js/CanvasConnection.js"></script>
     <script src="~/js/ChatConnection.js"></script>
-</body>
-</html>
+</div>

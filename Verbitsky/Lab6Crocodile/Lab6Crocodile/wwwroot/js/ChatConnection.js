@@ -1,18 +1,29 @@
-﻿const Connection = new signalR.HubConnectionBuilder()
-    .withUrl('/chat')
+﻿const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/chat")
     .build();
 
-Connection.on("Send", function (data) {
-    let elem = document.createElement("p");
-    elem.appendChild(document.createTextNode(data));
-    let firstElem = document.getElementById("chatroom").firstChild;
-    document.getElementById("chatroom").insertBefore(elem, firstElem);
+connection.start().catch(err => console.error(err.toString()));
+
+connection.on('Send', (name, message) => {
+    let nameElement = document.createElement('strong');
+    nameElement.innerText = `${name}:`;
+
+    let msgElement = document.createElement('em');
+    msgElement.innerText = ` ${message}`;
+
+    let li = document.createElement('li');
+    li.appendChild(nameElement);
+    li.appendChild(msgElement);
+
+    $('#messages').append(li);
 });
 
-document.getElementById("sendBtn").addEventListener("click", function (e) {
-    let message = document.getElementById("message").value;
-    document.getElementById("message").value = "";
-    Connection.invoke("Send", message);
-});
+document.getElementById('frm-send-message').addEventListener('submit', event => {
+    let name = $('#spn-name').text();
+    let message = $('#message').val();
 
-Connection.start();
+    $('#message').val('');
+
+    connection.invoke('Send', name, message);
+    event.preventDefault();
+});

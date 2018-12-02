@@ -1,7 +1,6 @@
 ﻿@model SelectList
 @{
     ViewData["Title"] = "Crocodile";
-
 }
 
 <div>
@@ -10,16 +9,21 @@
         Ваш браузер не поддерживает Canvas
     </canvas>
 
-    <div id="entrance" style="margin-top: 10px;">
-        <label for="name">Enter your name:</label>
-        <input type="text" id="name" />
+    <table id="entrance" style="margin-top: 10px;">
+        <tr>
+            <td><label for="name">Enter your name: </label></td>
+            <td><input type="text" id="name" /></td>
+        </tr>
+        <tr>
+            <td><label for="dropDownList">Select group </label></td>
+            <td>@Html.DropDownList("Groups", Model, htmlAttributes: new { id = "dropDownList", @class = "" })</td>
+        </tr>
+        <tr>
+            <td><button onclick="Register()">Continue</button></td>
+        </tr>
+    </table>
 
-        <div class="col-md-10">
-            @Html.DropDownList("Groups", Model, htmlAttributes: new { @class = "dropDownList" })
-        </div>
-
-        <button onclick="Register()">Continue</button>
-    </div>
+    <h3 id="SecretWord" style="display: none">Секретное слово: </h3>
 
     <div id="chat" style="display: none">
         <h3 id="spn-name"></h3>

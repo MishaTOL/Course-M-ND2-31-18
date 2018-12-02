@@ -9,11 +9,13 @@ namespace Lab6Crocodile.Hubs
         public async Task Register(string Name, string dropDownList)
         {
             var groupName = (dropDownList != Models.GroupManager.DefaultName) ? dropDownList : Name;
+            Models.GroupManager.UserAndGroup.Add(Context.ConnectionId, groupName);
             if (dropDownList == Models.GroupManager.DefaultName)
             {
+                string SecretWord = Models.SecretWordsGenerator.GetSecretWord().Take(1).Single();
                 Models.GroupManager.Groups.Add(Name);
+                await this.Clients.Client(Context.ConnectionId).SendAsync("GetSecretWord", SecretWord);
             }
-            Models.GroupManager.UserAndGroup.Add(Context.ConnectionId, groupName);
             await this.Groups.AddToGroupAsync(Context.ConnectionId, groupName);
         }
         public async Task Send(string Name, string message)

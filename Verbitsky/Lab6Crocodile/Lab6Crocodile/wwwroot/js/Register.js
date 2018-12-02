@@ -3,5 +3,5 @@
     $('#entrance').hide();
     $('#chat').show();
     $('#myCanvas').show();
-    connection.invoke("Register", $('#name').val(), $('.dropDownList').val());
+    connection.invoke("Register", $('#name').val(), $('#dropDownList').val());
 }

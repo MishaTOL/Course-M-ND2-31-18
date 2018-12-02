@@ -62,6 +62,11 @@ connection.on('Send', (name, message) => {
     $('#messages').append(li);
 });
 
+connection.on('GetSecretWord', (word) => {
+    $("#SecretWord").text($("#SecretWord").text() + word);
+    $("#SecretWord").show();
+});
+
 document.getElementById('frm-send-message').addEventListener('submit', event => {
     let name = $('#spn-name').text();
     let message = $('#message').val();

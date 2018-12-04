@@ -1,0 +1,37 @@
+﻿@model WebAppLab1.Models.Students
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    <h2>Удаление записи</h2>
+}
+
+<div>
+    @using (Html.BeginForm())
+    {
+        <table class="table table-striped">
+            <tr>
+                <td width="100" style="color:darkblue"><h4>ID:</h4>          </td>
+                <td width="100" style="color:red"><h4>@Html.DisplayFor(m => m.Id)</h4></td>
+            </tr>
+            <tr>
+                <td width="100" style="color:darkblue"><h4>Имя:</h4>         </td>
+                <td width="100" style="color:red"><h4>@Html.DisplayFor(m => m.FirstName)</h4></td>
+            </tr>
+            <tr>
+                <td width="100" style="color:darkblue"><h4>Фамилия:</h4>     </td>
+                <td width="100" style="color:red"><h4>@Html.DisplayFor(m => m.LastName)</h4></td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Удалить" class="btn btn-danger" />
+            </div>
+        </div>
+    }
+</div>
+<div>
+    <br />
+    <h4>@Html.ActionLink("Назад к списку", "Index", "Home", new { @class = "btn btn-info" })</h4>
+</div>

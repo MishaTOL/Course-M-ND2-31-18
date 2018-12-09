@@ -13,9 +13,9 @@ namespace Validation.Models
             RuleFor(payment => payment.FirstName).NotNull();
             RuleFor(payment => payment.MidleName).NotNull();
             RuleFor(payment => payment.LastName).NotNull();
-            RuleFor(payment => payment.Address).NotNull().Matches(@"[\w',-\\/.\s]");
-            RuleFor(payment => payment.City).NotNull().Matches(@"[\w -]");
-            RuleFor(payment => payment.Country).NotNull().Matches(@"[\w -]");
+            RuleFor(payment => payment.Address).NotNull().Matches(@"[\w',-\\/.\s]+");
+            RuleFor(payment => payment.City).NotNull().Matches(@"[a-zA-Z -]+");
+            RuleFor(payment => payment.Country).NotNull().Matches(@"[a-zA-Z -]+");
             RuleFor(payment => payment.PostCode).Must(x => x > 9999 && x < 100000);
             RuleFor(payment => payment.Email).NotNull().EmailAddress();
             RuleFor(payment => payment.Amount).Must(x => x > 0.01 && x < 99999.99);

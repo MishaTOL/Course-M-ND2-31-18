@@ -88,7 +88,6 @@ namespace Jwt.Api
             app.UseAuthentication();
             app.UseMvc();
 
-
         }
     }
 }

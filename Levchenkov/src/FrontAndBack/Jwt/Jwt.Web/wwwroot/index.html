@@ -6,12 +6,12 @@
 </head>
 <body>
     <div id="postContainer"></div>
-    
-    <input id="createPostContent" type="text"/>
-    <input id="createPost" type="button"/>
+
+    <input id="createPostContent" type="text" />
+    <input id="createPost" type="button" value="Create Post"/>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    
+
     <script>
         $("#createPost").click(function () {
             $.ajax({
@@ -31,7 +31,7 @@
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:54375/api/post',
-                
+
                 success: function (posts) {
                     var container = $("#postContainer");
 
@@ -45,6 +45,12 @@
             });
         });
     </script>
-
+    <script src="/js/Main.js"></script>
+    <script>
+        Jwt.Web.MainPage.Init();
+        var greeter = new Jwt.Web.Greeter("Eugene");
+        greeter.greet();
+        greeter.goodBye();
+    </script>
 </body>
 </html>

@@ -8,24 +8,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Jwt.Api.Controllers
 {
+    public class PostStorage
+    {
+        public static List<Post> Posts = new List<Post>();
+    }
+
     [Produces("application/json")]
     [Route("api/Post")]
     public class PostController : Controller
     {
         private static int lastId = 1;
-        private static List<Post> posts = new List<Post>();
         // GET: api/Post
         [HttpGet]
         public IEnumerable<Post> Get()
         {
-            return posts;
+            return PostStorage.Posts;
         }
 
         // GET: api/Post/5
         [HttpGet("{id}", Name = "Get")]
         public Post Get(int id)
         {
-            return posts.FirstOrDefault(x => x.Id == id);
+            return PostStorage.Posts.FirstOrDefault(x => x.Id == id);
         }
         
         // POST: api/Post
@@ -38,14 +42,14 @@ namespace Jwt.Api.Controllers
                 Content = content
             };
 
-            posts.Add(post);
+            PostStorage.Posts.Add(post);
         }
         
         // PUT: api/Post/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string content)
         {
-            var post = posts.FirstOrDefault(x => x.Id == id);
+            var post = PostStorage.Posts.FirstOrDefault(x => x.Id == id);
             post.Content = content;
         }
         
@@ -53,7 +57,7 @@ namespace Jwt.Api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            posts.RemoveAll(x => x.Id == id);
+            PostStorage.Posts.RemoveAll(x => x.Id == id);
         }
     }
 }

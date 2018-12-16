@@ -6,8 +6,8 @@ namespace Lab8.Models
 {
     public class PaymentAcceptanceValidator : AbstractValidator<PaymentAcceptanceViewModel>
     {
-        private static readonly string AddressPattern = @"[A-Za-z0-9 ,.-]+";
-        private static readonly string cityPattern = "[A-Za-z -]+";
+        private static readonly string AddressPattern = @"[A-Za-z0-9А-Яа-я ,.-]+";
+        private static readonly string cityPattern = "[A-Za-zА-Яа-я -]+";
         private static readonly string CountryPattern = cityPattern;
         private static readonly string PostCodePattern = @"\d{5}";
         private static readonly string CreditCardNumberPattern = @"\d{16}";

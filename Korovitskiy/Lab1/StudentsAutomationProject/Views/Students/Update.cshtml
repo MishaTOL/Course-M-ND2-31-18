@@ -1,0 +1,36 @@
+﻿@model StudentsAutomationProject.Models.StudentViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Update</title>
+</head>
+<body>
+    <div>
+        <input type="button" value="back" onclick="location.href='@Url.Action("students","students")'" />
+    </div>
+    <div>
+        @using (Html.BeginForm("Update", "Students", FormMethod.Post))
+        {
+            <div>
+                @Html.HiddenFor(student => student.Id)
+            </div>
+            <div>
+                @Html.DisplayNameFor(student => student.Name)
+                @Html.TextBoxFor(student => student.Name)
+            </div>
+            <div>
+                @Html.DisplayNameFor(student => student.Course)
+                @Html.DropDownListFor(student => student.Course, new SelectList(new int[] { 1, 2, 3, 4, 5 }))
+            </div>
+            <input type="submit" value="Update User" />
+        }
+    </div>
+</body>
+</html>

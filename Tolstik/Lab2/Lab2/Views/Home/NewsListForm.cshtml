@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "NewsListForm";
+}
+@using Lab2.Models
+@model Tuple<CurrentStudent, List<Post>>
+
+
+    <p>Текущий студент: @Model.Item1.FirstName @Model.Item1.LastName</p>
+    <input type="submit" class="btn btn-primary" value="Создать новый пост" onclick="location.href='@Url.Action("CreateNewPostForm", "Home", Model.Item1)'"/>
+    <table class="table">
+        @foreach (var item in Model.Item2)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfCreation)
+                </td>
+                <td>
+                    @foreach (var tag in item.Tags)
+                    {
+                        @Html.DisplayFor(modelItem => tag.Name)
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Просмотр", "ReadPost", new { id = item.Id }) |
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Удалить", "DeletePost", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>

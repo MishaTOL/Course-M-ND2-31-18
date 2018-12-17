@@ -1,0 +1,39 @@
+﻿@using Lab2.Models
+@using Lab2.Models.ViewModels.Posts
+@model IEnumerable<IndexPostViewModel>
+
+<h2>Posts</h2>
+
+@if ((Session["User"] as Student) != null)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+<table class="table">
+    @foreach (var item in Model ?? new List<IndexPostViewModel>())
+    {
+        <tr>
+            <td>
+                <div>
+                    <h3><strong>@item.Header</strong></h3>
+                    @item.Content
+                </div>
+            </td>
+            <td>
+                @item.Created.ToString() by <strong>@item.Author</strong>
+            </td>
+            <td>
+                @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == item.AuthorId)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span>|</span>
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == item.AuthorId)
+                {
+                    <span>| </span>@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
+</table>

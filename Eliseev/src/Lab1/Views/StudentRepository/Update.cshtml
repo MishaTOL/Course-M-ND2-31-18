@@ -1,0 +1,47 @@
+﻿@model Lab1.Models.StudentInfo
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Update</title>
+</head>
+<body>
+    <div>
+        <h4>In order to update a new student change data in the following form</h4>
+        <p style="color:red">@ViewBag.Error</p>
+        <hr>
+        <table width="500">
+            @using (Html.BeginForm("Update", "StudentRepository", FormMethod.Post))
+            {
+                <tr>
+                    <td width="25%"></td>
+                    <td width="75%">@Html.HiddenFor(student => student.Id)</td>
+                </tr>
+                <tr>
+                    <td width="25%">@Html.LabelFor(student => student.FirstName)</td>
+                    <td width="75%">@Html.EditorFor(student => student.FirstName)</td>
+                </tr>
+                <tr>
+                    <td width="25%">@Html.LabelFor(student => student.SecondName)</td>
+                    <td width="75%">@Html.EditorFor(student => student.SecondName)</td>
+                </tr>
+                <tr>
+                    <td width="25%">@Html.LabelFor(student => student.Age)</td>
+                    <td width="75%">@Html.EditorFor(student => student.Age)</td>
+                </tr>
+                <tr>
+                    <td width="25%"><input type="submit" value="Update"></td>
+                    <td width="75%"></td>
+                </tr>
+            }
+        </table>
+        <hr>
+        @Html.ActionLink("Back to a student list", "Index");
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<StudentsAutomationProject.Models.StudentViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Students</title>
+</head>
+<body>
+    <div>
+        <input type="button" value="Create" onclick="location.href = '@Url.Action("Create", "Students")'" />
+    </div>
+
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayName("Actions")
+            </th>
+        </tr>
+        @foreach (var itemModel in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(student => itemModel.Id)
+                </td>
+                <td>
+                    @Html.ActionLink(itemModel.Name, "show", "students", new { id = itemModel.Id }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(student => itemModel.Course)
+                </td>
+                <td>
+                    <input type="button" value="Update" onclick="location.href='@Url.Action("Update", "Students",new { id = itemModel.Id})'" />
+                    <input type="button" value="Delete" onclick="location.href='@Url.Action("Delete", "Students",new { id = itemModel.Id})'" />
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

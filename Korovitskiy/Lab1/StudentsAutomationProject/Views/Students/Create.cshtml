@@ -1,0 +1,32 @@
+﻿@model StudentsAutomationProject.Models.StudentViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Create", "Students", FormMethod.Post))
+        {
+            <div>
+                @Html.DisplayNameFor(student => student.Name)
+                @Html.TextBoxFor(student => student.Name)
+            </div>
+            <div>
+                @Html.DisplayNameFor(student => student.Course)
+                @Html.DropDownListFor(student => student.Course, new SelectList(new int[] { 1, 2, 3, 4, 5 }.ToList()))
+            </div>
+            <div>
+                <input type="submit" value="Create">
+            </div>
+        }
+    </div>
+</body>
+</html>

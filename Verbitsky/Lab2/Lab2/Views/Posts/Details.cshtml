@@ -1,0 +1,67 @@
+﻿@using Lab2.Models.ViewModels.Posts
+@using Lab2.Models.ViewModels.Comments
+@using Lab2.Models
+@model DetailsPostViewModel
+
+<h2>Details</h2>
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Header)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Header)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+
+        <dd>
+            @foreach (var i in Model.Tags)
+            {
+                <div style="float: left; margin-right: 10px;">@i.Name </div>
+            }
+        </dd>
+
+    </dl>
+</div>
+@if (Session["User"] != null)
+{
+    <p> @Html.ActionLink("Add comment", "Create", "Comments", new { postId = Model.Id }, new object()) </p>
+}
+@Html.Partial("~/Views/Comments/ListComments.cshtml", AutoMapper.Mapper.Map<ICollection<Comment>, ICollection<PartialListCommentViewModel>>(Model.Comments))
+<p>
+    @if ((Session["User"] as Student) != null && (Session["User"] as Student).Id == Model.AuthorId)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) <span> | </span>
+    }
+    @Html.ActionLink("Back to Posts", "Index")
+</p>

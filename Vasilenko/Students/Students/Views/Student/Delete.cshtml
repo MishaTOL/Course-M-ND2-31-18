@@ -1,0 +1,17 @@
+﻿@model Students.Models.Student
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h5>Please input Student ID</h5>
+@using (Html.BeginForm("Delete", "Student", FormMethod.Post))
+{
+    @Html.LabelFor(model => model.ID) <br />
+    @Html.EditorFor(model => model.ID)
+    <input type="submit" value="Delete" />
+}
+
+
+

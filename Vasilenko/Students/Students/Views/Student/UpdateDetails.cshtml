@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Students.Models.Student>
+@using Students.Models
+
+@{
+    ViewBag.Title = "UpdateDetails";
+}
+
+<h2>UpdateDetails</h2>
+
+
+@using (Html.BeginForm("Save", "Student", FormMethod.Post))
+{
+    foreach (var item in Model)
+    {
+        <input type="hidden" value="@item.ID" name="ID" />
+       <h6> Student ID: 
+        @Html.DisplayFor(modelItem=>item.ID) </h6>
+       <p> @Html.TextBox("FirstName", item.FirstName) </p>
+       <p> @Html.TextBox("LastName", item.LastName)</p>
+    }
+    <p><input type="submit" value="Update" /></p>
+}
+
+

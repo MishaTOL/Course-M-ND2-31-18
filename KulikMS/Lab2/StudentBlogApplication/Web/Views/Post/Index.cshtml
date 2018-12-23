@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Domain.Contracts.Models.PostView>
+
+<h2>Student posts</h2>
+<p>
+    <h4>
+        @Html.ActionLink("All posts", "Index")
+        @Html.ActionLink("My Posts", "Index", new { authorId = ViewBag.UserId })
+    </h4>
+</p>
+<p>
+    @Html.ActionLink("Create New Post", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
+            @(ViewBag.UserId != null && ViewBag.UserId == item.AuthorId
+                ? Html.Partial("_PostEditLinks", item.Id) : null)
+        </td>
+    </tr>
+}
+
+</table>

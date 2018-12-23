@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Domain.Contracts.Models.TagView>
+
+@Html.Label("Tags", htmlAttributes: new { @class = "control-label col-md-2" })
+<div>
+    @foreach (var item in Model)
+    {
+        @Html.DisplayFor(modelItem => item.Name) 
+        @Html.ActionLink(" x ", "Delete", "Tag", new { id = item.Id }, null);
+    }
+</div>

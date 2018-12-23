@@ -1,0 +1,27 @@
+[
+  {
+    "StudentId": 1,
+    "FirstName": "Николай",
+    "LastName": "Смирнов"
+  },
+  {
+    "StudentId": 2,
+    "FirstName": "Сергей",
+    "LastName": "Иванов"
+  },
+  {
+    "StudentId": 3,
+    "FirstName": "Дмитрий",
+    "LastName": "Алексеев"
+  },
+  {
+    "StudentId": 4,
+    "FirstName": "Александр",
+    "LastName": "Дмитриев"
+  },
+  {
+    "StudentId": 5,
+    "FirstName": "Николай",
+    "LastName": "Беляев"
+  }
+]

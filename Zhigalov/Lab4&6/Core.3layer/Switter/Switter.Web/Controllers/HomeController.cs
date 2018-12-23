@@ -4,17 +4,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Jwt.Web.Models;
-using Microsoft.AspNetCore.Cors;
+using Switter.Web.Models;
 
-namespace Jwt.Web.Controllers
+namespace Switter.Web.Controllers
 {
-    //[EnableCors("MyCors")]
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:58142");
             return View();
         }
 
@@ -32,6 +29,12 @@ namespace Jwt.Web.Controllers
             return View();
         }
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
